@@ -15,6 +15,62 @@
 @media(max-width:540px){.shell{width:calc(100% - 28px)}.site-header{height:72px}.brand{font-size:16px}.brand-mark{width:30px;height:30px}.top-right{gap:0}.top-right .mini-label{display:none}.source-btn{padding:9px 11px;font-size:11px}.hero{border-radius:18px;padding:23px 21px;gap:23px}.eyebrow{font-size:9px;letter-spacing:.6px;gap:6px}.eyebrow-line{width:15px}.hero h1{font-size:36px;line-height:1.3;letter-spacing:-1.6px;margin:17px 0}.hero p{font-size:11px;line-height:1.9}.desktop-br{display:none}.hero-actions{gap:9px}.main-cta,.ghost-cta{padding:10px 12px;font-size:11px}.main-cta span,.ghost-cta span{padding-left:7px}.hero-chart{padding:19px}.chart-footer{font-size:7px}.barline{grid-template-columns:114px minmax(0,1fr) 25px}.status-banner{margin:14px 0 15px;font-size:10px;gap:5px}.metrics{gap:9px}.metric{padding:15px 14px 13px;min-height:112px;border-radius:13px}.metric-label{font-size:10px}.metric-value{font-size:31px;margin:10px 0 2px}.metric-value.small-time{font-size:20px}.metric p{font-size:9px}.section-top{display:block;margin-bottom:17px}.section-top h2,.explain h2{font-size:24px}.section-top>p{margin:8px 0 0;text-align:left;max-width:none}.pick-grid{gap:10px}.pick{min-height:158px;padding:16px 12px;border-radius:13px}.pick-symbol{width:32px;height:32px;border-radius:10px;font-size:19px}.pick-tag{font-size:9px;margin-top:13px}.pick h3{font-size:13px}.pick p{font-size:10px}.filters{padding:12px}.tab-group{gap:0;width:100%;justify-content:space-between}.filter-tab{padding:8px 10px;font-size:11px}.filter-tools{width:100%;display:grid;grid-template-columns:1fr auto}.searchbox input{width:100%;min-width:0}.board-panel{border-radius:12px}.print-btn{margin-top:12px}.explain-grid{grid-template-columns:1fr;gap:19px}.explain-grid article{border-left:none;border-top:1px solid #e1e7f0;padding:14px 0 0}.footer{display:block}.foot-right{margin-top:22px;align-items:start}.compare-dock{width:calc(100% - 26px);bottom:12px;gap:10px;justify-content:space-between;padding:9px;font-size:11px}.compare-dialog{padding:20px}.compare-cards{grid-template-columns:1fr}.footer .legal{line-height:1.8}}
 @media print{.site-header,.hero-actions,.filters,.print-btn,.compare-dock,.source-btn,.compare-dialog{display:none!important}.shell{width:100%}.hero{min-height:0;padding:20px;box-shadow:none}.hero-chart{display:none}.hero h1{font-size:30px}.metrics{grid-template-columns:repeat(4,1fr)}.recommendation,.board-section{margin-top:20px}.pick{min-height:120px}.ranking-table{min-width:0!important}.ranking-table th,.ranking-table td{font-size:9px;padding:5px}.col-compare{display:none}.ranking-table td:last-child,.ranking-table th:last-child{display:none}.col-model{width:200px}.col-best{width:200px}.ranking-table tbody tr{height:35px}.model-icon{width:19px;height:19px;flex-basis:19px;font-size:14px}.score-val{font-size:15px}.explain{margin:20px 0}.footer{padding:12px 0}body{background:white;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 
+/* UI refinement only: keep the approved layout, palette and all reference data. */
+.model-icon,.pick-symbol{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;padding:0;line-height:0;box-sizing:border-box;overflow:hidden}
+.model-icon{width:32px;height:32px;flex:0 0 32px}
+.icon-glyph{display:block;width:20px;height:20px;flex:none;overflow:visible}
+.pick-symbol .icon-glyph{width:22px;height:22px}
+.model-cell{gap:11px;min-width:0}
+.model-cell>div{min-width:0}
+.model-name{line-height:1.4;font-weight:750}
+.model-badge{line-height:1.4;margin-top:4px}
+.ranking-table tbody tr{height:56px}
+.ranking-table th:first-child{padding-left:13px}
+.ranking-table th:nth-child(1),.ranking-table th:nth-child(3),.ranking-table th:nth-child(4),.ranking-table th:nth-child(5),.ranking-table th:nth-child(7),.ranking-table td:nth-child(1),.ranking-table td:nth-child(3),.ranking-table td:nth-child(4),.ranking-table td:nth-child(5),.ranking-table td:nth-child(7){text-align:center}
+.score-val,.usd-cell,.relative-cell,.rank-number{font-variant-numeric:tabular-nums;white-space:nowrap}
+.compare-checkbox{display:block;width:18px;height:18px;margin:0 auto}
+.ranking-table tr:has(.compare-checkbox:checked){box-shadow:inset 3px 0 0 #4378ed}
+.metric{display:grid;grid-template-rows:auto minmax(46px,auto) auto;gap:10px;align-content:start}
+.metric-value,.metric-value.small-time{display:flex;align-items:baseline;gap:5px;min-width:0;min-height:46px;margin:0;white-space:nowrap}
+.metric-value.small-time{align-items:center}
+.metric-value small{flex:none}
+.pick{display:flex;flex-direction:column;align-items:flex-start}
+.pick h3{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.45;overflow-wrap:anywhere;font-weight:750}
+.pick p{font-size:12px;line-height:1.7;color:#765688}
+.pick.sol p{color:#8d6546}
+.pick.luna p{color:#517b9c}
+.searchbox>span{display:grid;place-items:center;flex:0 0 34px;width:34px;height:100%;padding:0;line-height:1}
+.ui-search-icon{display:block;width:17px;height:17px}
+.searchbox input{padding-left:0;min-width:0}
+.sortbox select{min-height:36px}
+.status-left{align-items:flex-start;min-width:0}
+.status-icon{flex:none;line-height:1.45}
+.explain-grid p{font-size:12px}
+.table-scroller{overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:#c6d6eb #f4f7fc}
+.table-scroll-hint{display:none;align-items:center;justify-content:space-between;gap:8px;padding:0 16px 10px;color:#617ba0;font-size:11px}
+.table-scroll-hint span:last-child{color:#3377cd;font-size:15px;line-height:1}
+.filter-tab:focus-visible,.source-btn:focus-visible,.main-cta:focus-visible,.ghost-cta:focus-visible,.print-btn:focus-visible,.dock-open:focus-visible,.dock-clear:focus-visible,.dialog-close:focus-visible,.compare-checkbox:focus-visible,.table-scroller:focus-visible{outline:2px solid #4f8df3;outline-offset:3px}
+.dialog-close{display:grid;place-items:center;line-height:1;padding:0;flex:none}
+@media(max-width:1100px){.table-scroll-hint{display:flex}}
+@media(max-width:540px){
+  .metric{gap:7px;grid-template-rows:auto minmax(38px,auto) auto}
+  .metric-value,.metric-value.small-time{min-height:38px;margin:0}
+  .metric-value small{font-size:11px;letter-spacing:0}
+  #minCost{font-size:clamp(18px,5.8vw,26px);letter-spacing:-.8px;gap:4px}
+  .metric p{font-size:10px}
+  .pick h3{min-height:2.9em;margin-top:4px;margin-bottom:5px}
+  .pick-tag{min-height:2.8em;display:flex;align-items:flex-end;line-height:1.4;margin-top:12px}
+  .pick p{font-size:11px;line-height:1.65}
+  .pick-symbol .icon-glyph{width:21px;height:21px}
+  .filter-tab{min-height:38px}
+  .searchbox,.sortbox{height:42px}
+  .filter-tools{grid-template-columns:minmax(0,1fr) auto}
+  .dialog-close{width:42px;height:42px}
+  .table-scroll-hint{padding:0 13px 10px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar-skeleton{animation:none}.ranking-table tbody tr{transition:none}}
+@media print{.table-scroll-hint{display:none}.table-scroller{overflow:visible}.model-icon{width:19px;height:19px;flex-basis:19px}.model-icon .icon-glyph{width:13px;height:13px}.ranking-table tbody tr{height:35px}.metric-value{font-size:30px}.metric-value.small-time{font-size:20px}}
+
 </style>
 </head>
 <body>
@@ -64,11 +120,12 @@
             <button type="button" class="filter-tab" data-family="5.6" aria-pressed="false">GPT-5.6</button>
           </div>
           <div class="filter-tools">
-            <label class="searchbox"><span aria-hidden="true">⌕</span><input id="search" aria-label="搜索模型" placeholder="搜索模型名称…" autocomplete="off"></label>
+            <label class="searchbox"><span aria-hidden="true"><svg class="ui-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></span><input id="search" aria-label="搜索模型" placeholder="搜索模型名称…" autocomplete="off"></label>
             <label class="sortbox"><span class="sr-only">排序方式</span><select id="sort" aria-label="排序方式"><option value="score">智能指数 ↓</option><option value="cost">任务成本 ↑</option><option value="value">性价比 ↓</option></select></label>
           </div>
         </div>
-        <div class="table-scroller"><table class="ranking-table"><thead><tr><th scope="col" class="col-rank">名次</th><th scope="col" class="col-model">模型 / 推理模式</th><th scope="col" class="col-index">智能指数 <small>↑ 更高更好</small></th><th scope="col" class="col-usd">任务成本 <small>USD / task</small></th><th scope="col" class="col-relative">相对消耗 <small>以 $0.01 为 1</small></th><th scope="col" class="col-best">最适合做什么</th><th scope="col" class="col-compare">对比</th></tr></thead><tbody id="rankingRows"><tr><td colspan="7" class="empty-row">正在读取数据…</td></tr></tbody></table></div>
+        <div class="table-scroll-hint" aria-hidden="true"><span>左右滑动表格，查看成本、任务与对比</span><span>↔</span></div>
+        <div class="table-scroller" tabindex="0" role="region" aria-label="完整排行榜，可左右滚动查看所有列"><table class="ranking-table"><thead><tr><th scope="col" class="col-rank">名次</th><th scope="col" class="col-model">模型 / 推理模式</th><th scope="col" class="col-index">智能指数 <small>↑ 更高更好</small></th><th scope="col" class="col-usd">任务成本 <small>USD / task</small></th><th scope="col" class="col-relative">相对消耗 <small>以 $0.01 为 1</small></th><th scope="col" class="col-best">最适合做什么</th><th scope="col" class="col-compare">对比</th></tr></thead><tbody id="rankingRows"><tr><td colspan="7" class="empty-row">正在读取数据…</td></tr></tbody></table></div>
         <div class="board-footer"><span>展示用模拟参考数字 · 不是官方测评结果</span><span id="tableFoot">按智能指数降序</span></div>
       </div>
     </section>
@@ -484,7 +541,15 @@
   const $$ = selector => [...document.querySelectorAll(selector)];
   let data = { models: [] }, family = 'all', sort = 'score', search = '';
   const selected = new Set();
-  const SYMBOLS = { astra:'◎', sol:'☼', terra:'◈', luna:'☾', other:'✧' };
+  // Explicit SVG geometry avoids the baseline/font fallback offset of Unicode icons.
+  const iconSvg = paths => `<svg class="icon-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${paths}</svg>`;
+  const SYMBOLS = {
+    astra: iconSvg('<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5.2"/><circle cx="12" cy="12" r="1.9"/>'),
+    sol: iconSvg('<circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.28 5.28l1.42 1.42M17.3 17.3l1.42 1.42M5.28 18.72l1.42-1.42M17.3 6.7l1.42-1.42"/>'),
+    terra: iconSvg('<path d="m12 3 9 9-9 9-9-9Z"/><path d="m12 8 4 4-4 4-4-4Z" fill="currentColor" stroke="none"/>'),
+    luna: iconSvg('<path d="M20.9 13A9 9 0 1 1 11 3.1 7 7 0 0 0 20.9 13Z"/>'),
+    other: iconSvg('<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z"/>')
+  };
   const MODE_LABEL = { astra:'ASTRA', sol:'SOL', terra:'TERRA', luna:'LUNA', other:'MODEL' };
   const esc = v => String(v ?? '').replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
   const fmtNum = n => Number.isFinite(+n) ? (+n).toLocaleString('en-US',{maximumFractionDigits:2}) : '—';
@@ -534,7 +599,7 @@
   function renderPicks() {
     $('#picks').innerHTML=recs().map(p=>{
       const m=p.model, c=modeClass(m||{mode:p.type});
-      return `<article class="pick ${esc(c)}"><div class="pick-symbol">${SYMBOLS[c]}</div><div class="pick-tag">${esc(p.tag)}</div><h3 title="${esc(m?.name||'暂无测评模式')}">${esc(m?.name||'暂无测评模式')}</h3><p>${esc(p.title)} · ${esc(p.sub)}</p><span class="pick-letter" aria-hidden="true">${esc(MODE_LABEL[c][0])}</span></article>`;
+      return `<article class="pick ${esc(c)}"><div class="pick-symbol" aria-hidden="true">${SYMBOLS[c]}</div><div class="pick-tag">${esc(p.tag)}</div><h3 title="${esc(m?.name||'暂无测评模式')}">${esc(m?.name||'暂无测评模式')}</h3><p>${esc(p.title)} · ${esc(p.sub)}</p><span class="pick-letter" aria-hidden="true">${esc(MODE_LABEL[c][0])}</span></article>`;
     }).join('');
   }
   function displayRows() {
@@ -547,7 +612,7 @@
       const pick=recs().find(x=>x.model && x.model.id===m.id);
       const delta=m.score_delta;
       const deltaText=delta===null || delta===undefined || delta===0 ? '' : `<small class="delta ${delta>0?'up':'down'}">${delta>0?'▲':'▼'}${fmtNum(Math.abs(delta))}</small>`;
-      return `<tr class="family-${esc(c)}"><td><span class="rank-number ${i<3?'top3':''}">${i+1}</span></td><td><div class="model-cell"><span class="model-icon">${SYMBOLS[c]}</span><div><div class="model-name">${esc(m.name)}</div>${pick?`<span class="model-badge">${esc(pick.title)}</span>`:''}</div></div></td><td><span class="score-val">${fmtNum(m.score)}</span>${deltaText}</td><td><span class="usd-cell">${fmtMoney(m.cost_usd)}</span></td><td><span class="relative-cell">≈ ${fmtNum(m.relative_cost)}</span></td><td class="best-cell">${esc(bestText(m))}</td><td><input type="checkbox" class="compare-checkbox" aria-label="选择 ${esc(m.name)} 用于对比" data-id="${esc(m.id)}" ${selected.has(m.id)?'checked':''}></td></tr>`;
+      return `<tr class="family-${esc(c)}"><td><span class="rank-number ${i<3?'top3':''}">${i+1}</span></td><td><div class="model-cell"><span class="model-icon" aria-hidden="true">${SYMBOLS[c]}</span><div><div class="model-name">${esc(m.name)}</div>${pick?`<span class="model-badge">${esc(pick.title)}</span>`:''}</div></div></td><td><span class="score-val">${fmtNum(m.score)}</span>${deltaText}</td><td><span class="usd-cell">${fmtMoney(m.cost_usd)}</span></td><td><span class="relative-cell">≈ ${fmtNum(m.relative_cost)}</span></td><td class="best-cell">${esc(bestText(m))}</td><td><input type="checkbox" class="compare-checkbox" aria-label="选择 ${esc(m.name)} 用于对比" data-id="${esc(m.id)}" ${selected.has(m.id)?'checked':''}></td></tr>`;
     }).join(''):'<tr><td colspan="7" class="empty-row">没有找到匹配的模式，可以换个关键词或版本。</td></tr>';
   }
   function updateDock(){
