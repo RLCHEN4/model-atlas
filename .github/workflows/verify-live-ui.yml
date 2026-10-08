@@ -1,0 +1,43 @@
+name: Verify published MODEL ATLAS UI
+on:
+  push:
+    branches: [preview/color-ranking-35]
+    paths: [.github/workflows/verify-live-ui.yml]
+permissions:
+  contents: read
+jobs:
+  verify-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Verify public homepage byte-for-byte
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib, json, time
+          from urllib.request import Request, urlopen
+          expected = '0614f0258ce4d6d93f44c463a9d54bcb631be00a35ad77f43cd437ca0c9bae09'
+          base = 'https://rlchen4.github.io/model-atlas/'
+          last = None
+          for attempt in range(8):
+              try:
+                  req = Request(base + '?verify=16987a3-' + str(attempt), headers={'Cache-Control': 'no-cache', 'User-Agent': 'MODEL-ATLAS-release-verification/1.0'})
+                  with urlopen(req, timeout=12) as response:
+                      body = response.read()
+                      digest = hashlib.sha256(body).hexdigest()
+                      last = {'url': base, 'http_status': response.status, 'bytes': len(body), 'sha256': digest, 'matches_approved': digest == expected}
+                  print(json.dumps(last), flush=True)
+                  if digest == expected:
+                      text = body.decode('utf-8')
+                      assert 'icon-glyph' in text and 'hero-chart' in text and 'compareDialog' in text
+                      assert '未经官方核验' in text
+                      print('PASS: Published homepage matches the approved HTML exactly.')
+                      break
+              except Exception as error:
+                  last = str(error)
+                  print('Attempt', attempt + 1, last, flush=True)
+              if attempt < 7:
+                  time.sleep(6)
+          else:
+              raise SystemExit('Public homepage verification failed: ' + str(last))
+          PY
