@@ -1,0 +1,43 @@
+name: Apply approved MODEL ATLAS UI
+on:
+  push:
+    branches: [preview/color-ranking-35]
+    paths: [.github/workflows/apply-approved-ui.yml]
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply the exact user-approved HTML
+        shell: bash
+        run: |
+          python - <<'PYAPPROVED'
+          from pathlib import Path
+          import hashlib, json
+          p = Path('index.html')
+          raw = p.read_bytes()
+          base_sha = hashlib.sha1(f'blob {len(raw)}\0'.encode() + raw).hexdigest()
+          if base_sha != '330b7293a2df25d956069d93f2d336427c21c804':
+              raise SystemExit('Source changed; stop rather than overwrite another edit.')
+          text = raw.decode('utf-8')
+          ops = json.loads(r'''[[19873,19873,"/* UI refinement only: keep the approved layout, palette and all reference data. */\n.model-icon,.pick-symbol{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;padding:0;line-height:0;box-sizing:border-box;overflow:hidden}\n.model-icon{width:32px;height:32px;flex:0 0 32px}\n.icon-glyph{display:block;width:20px;height:20px;flex:none;overflow:visible}\n.pick-symbol .icon-glyph{width:22px;height:22px}\n.model-cell{gap:11px;min-width:0}\n.model-cell>div{min-width:0}\n.model-name{line-height:1.4;font-weight:750}\n.model-badge{line-height:1.4;margin-top:4px}\n.ranking-table tbody tr{height:56px}\n.ranking-table th:first-child{padding-left:13px}\n.ranking-table th:nth-child(1),.ranking-table th:nth-child(3),.ranking-table th:nth-child(4),.ranking-table th:nth-child(5),.ranking-table th:nth-child(7),.ranking-table td:nth-child(1),.ranking-table td:nth-child(3),.ranking-table td:nth-child(4),.ranking-table td:nth-child(5),.ranking-table td:nth-child(7){text-align:center}\n.score-val,.usd-cell,.relative-cell,.rank-number{font-variant-numeric:tabular-nums;white-space:nowrap}\n.compare-checkbox{display:block;width:18px;height:18px;margin:0 auto}\n.ranking-table tr:has(.compare-checkbox:checked){box-shadow:inset 3px 0 0 #4378ed}\n.metric{display:grid;grid-template-rows:auto minmax(46px,auto) auto;gap:10px;align-content:start}\n.metric-value,.metric-value.small-time{display:flex;align-items:baseline;gap:5px;min-width:0;min-height:46px;margin:0;white-space:nowrap}\n.metric-value.small-time{align-items:center}\n.metric-value small{flex:none}\n.pick{display:flex;flex-direction:column;align-items:flex-start}\n.pick h3{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.45;overflow-wrap:anywhere;font-weight:750}\n.pick p{font-size:12px;line-height:1.7;color:#765688}\n.pick.sol p{color:#8d6546}\n.pick.luna p{color:#517b9c}\n.searchbox>span{display:grid;place-items:center;flex:0 0 34px;width:34px;height:100%;padding:0;line-height:1}\n.ui-search-icon{display:block;width:17px;height:17px}\n.searchbox input{padding-left:0;min-width:0}\n.sortbox select{min-height:36px}\n.status-left{align-items:flex-start;min-width:0}\n.status-icon{flex:none;line-height:1.45}\n.explain-grid p{font-size:12px}\n.table-scroller{overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:#c6d6eb #f4f7fc}\n.table-scroll-hint{display:none;align-items:center;justify-content:space-between;gap:8px;padding:0 16px 10px;color:#617ba0;font-size:11px}\n.table-scroll-hint span:last-child{color:#3377cd;font-size:15px;line-height:1}\n.filter-tab:focus-visible,.source-btn:focus-visible,.main-cta:focus-visible,.ghost-cta:focus-visible,.print-btn:focus-visible,.dock-open:focus-visible,.dock-clear:focus-visible,.dialog-close:focus-visible,.compare-checkbox:focus-visible,.table-scroller:focus-visible{outline:2px solid #4f8df3;outline-offset:3px}\n.dialog-close{display:grid;place-items:center;line-height:1;padding:0;flex:none}\n@media(max-width:1100px){.table-scroll-hint{display:flex}}\n@media(max-width:540px){\n  .metric{gap:7px;grid-template-rows:auto minmax(38px,auto) auto}\n  .metric-value,.metric-value.small-time{min-height:38px;margin:0}\n  .metric-value small{font-size:11px;letter-spacing:0}\n  #minCost{font-size:clamp(18px,5.8vw,26px);letter-spacing:-.8px;gap:4px}\n  .metric p{font-size:10px}\n  .pick h3{min-height:2.9em;margin-top:4px;margin-bottom:5px}\n  .pick-tag{min-height:2.8em;display:flex;align-items:flex-end;line-height:1.4;margin-top:12px}\n  .pick p{font-size:11px;line-height:1.65}\n  .pick-symbol .icon-glyph{width:21px;height:21px}\n  .filter-tab{min-height:38px}\n  .searchbox,.sortbox{height:42px}\n  .filter-tools{grid-template-columns:minmax(0,1fr) auto}\n  .dialog-close{width:42px;height:42px}\n  .table-scroll-hint{padding:0 13px 10px}\n}\n@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar-skeleton{animation:none}.ranking-table tbody tr{transition:none}}\n@media print{.table-scroll-hint{display:none}.table-scroller{overflow:visible}.model-icon{width:19px;height:19px;flex-basis:19px}.model-icon .icon-glyph{width:13px;height:13px}.ranking-table tbody tr{height:35px}.metric-value{font-size:30px}.metric-value.small-time{font-size:20px}}\n\n"],[24322,24323,"<svg class=\"ui-search-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\"><circle cx=\"10.5\" cy=\"10.5\" r=\"6.5\"/><path d=\"m16 16 4.5 4.5\"/></svg>"],[24712,24712,"-hint\" aria-hidden=\"true\"><span>左右滑动表格，查看成本、任务与对比</span><span>↔</span></div>\n        <div class=\"table-scroll"],[24714,24714,"\" tabindex=\"0\" role=\"region\" aria-label=\"完整排行榜，可左右滚动查看所有列"],[36176,36176,"// Explicit SVG geometry avoids the baseline/font fallback offset of Unicode icons.\n  const iconSvg = paths => `<svg class=\"icon-glyph\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\" focusable=\"false\">${paths}</svg>`;\n  "],[36193,36193,"\n   "],[36200,36200," iconSvg("],[36201,36202,"<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><circle cx=\"12\" cy=\"12\" r=\"5.2\"/><circle cx=\"12\" cy=\"12\" r=\"1.9\"/>"],[36203,36203,")"],[36204,36204,"\n   "],[36209,36209," iconSvg("],[36210,36211,"<circle cx=\"12\" cy=\"12\" r=\"4.5\"/><path d=\"M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.28 5.28l1.42 1.42M17.3 17.3l1.42 1.42M5.28 18.72l1.42-1.42M17.3 6.7l1.42-1.42\"/>"],[36212,36212,")"],[36213,36213,"\n   "],[36220,36220," iconSvg("],[36221,36222,"<path d=\"m12 3 9 9-9 9-9-9Z\"/><path d=\"m12 8 4 4-4 4-4-4Z\" fill=\"currentColor\" stroke=\"none\"/>"],[36223,36223,")"],[36224,36224,"\n   "],[36230,36230," iconSvg("],[36231,36232,"<path d=\"M20.9 13A9 9 0 1 1 11 3.1 7 7 0 0 0 20.9 13Z\"/>"],[36233,36233,")"],[36234,36234,"\n   "],[36241,36241," iconSvg("],[36242,36243,"<path d=\"m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z\"/>"],[36244,36244,")\n "],[41016,41016," aria-hidden=\"true\""],[42135,42135,"\" aria-hidden=\"true"],[46535,46535,"\n"]]''')
+          for start, end, replacement in reversed(ops):
+              text = text[:start] + replacement + text[end:]
+          result = text.encode('utf-8')
+          expected = '0614f0258ce4d6d93f44c463a9d54bcb631be00a35ad77f43cd437ca0c9bae09'
+          if hashlib.sha256(result).hexdigest() != expected:
+              raise SystemExit('Output does not match the approved HTML; stop.')
+          p.write_bytes(result)
+          Path('.github/workflows/apply-approved-ui.yml').unlink()
+          print('Approved HTML restored byte-for-byte; one-time helper removed.')
+          PYAPPROVED
+      - name: Commit approved homepage and remove the temporary helper
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html .github/workflows/apply-approved-ui.yml
+          git commit -m 'fix: apply approved SVG icon and typography refinements'
+          git push origin HEAD:preview/color-ranking-35
