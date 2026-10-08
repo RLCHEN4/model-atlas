@@ -1,65 +1,47 @@
-// MODEL ATLAS public edition. Editorial recommendations only: no AA scores, rankings, or third-party dataset.
+// This is an editorial example from previous conversation—not verified AA or OpenAI scores.
+// No redistribution of third-party benchmark datasets; no false claims of live updates.
 (() => {
   'use strict';
-  const $ = s => document.querySelector(s);
-  const $$ = s => [...document.querySelectorAll(s)];
-  const tasks = [
-    {name:'战略课题与高难研究',cat:'研究',difficulty:'非常复杂',tier:'flagship',why:'任务跨度大，需要分阶段拆解并反复核验',tip:'拆成子问题，并逐条验证关键结论'},
-    {name:'重大方案与决策复核',cat:'研究',difficulty:'非常复杂',tier:'flagship',why:'假设多、风险高，需要多角度检验',tip:'要求列出反例、边界和证据'},
-    {name:'技术架构与复杂重构',cat:'开发',difficulty:'复杂',tier:'high',why:'涉及依赖、接口与维护成本的权衡',tip:'先提供需求、代码结构和限制'},
-    {name:'疑难 Bug 与代码审查',cat:'开发',difficulty:'复杂',tier:'high',why:'需要定位根因并验证修复',tip:'附报错、复现步骤及测试'},
-    {name:'网页设计与产品原型',cat:'开发',difficulty:'中等',tier:'medium',why:'需求明确时能快速迭代布局和组件',tip:'附参考图和目标设备'},
-    {name:'脚本、SQL 与常规开发',cat:'开发',difficulty:'中等',tier:'medium',why:'有可测试结果，适合快速完成',tip:'要求给出可运行样例'},
-    {name:'品牌定位与整套营销方案',cat:'创作',difficulty:'复杂',tier:'high',why:'需要兼顾受众、信息结构和品牌一致性',tip:'明确目标用户、风格与预算'},
-    {name:'长篇故事与剧本结构',cat:'创作',difficulty:'复杂',tier:'high',why:'要控制人物动机、情节和连贯性',tip:'先确定故事大纲再逐章迭代'},
-    {name:'短视频文案与创意选题',cat:'创作',difficulty:'中等',tier:'medium',why:'容易通过风格样例和反馈快速改善',tip:'给出平台、时长、受众'},
-    {name:'日常邮件、会议纪要',cat:'办公',difficulty:'轻度',tier:'light',why:'目标明确、格式固定',tip:'提供固定模板提升一致性'},
-    {name:'批量摘要与关键词提取',cat:'办公',difficulty:'轻度',tier:'light',why:'规则清楚、重复性高',tip:'定义输出字段和示例'},
-    {name:'表格分类与格式转换',cat:'办公',difficulty:'轻度',tier:'light',why:'主要是确定性规则与结构化处理',tip:'抽检边界案例'},
-    {name:'多文件资料整理',cat:'研究',difficulty:'中等',tier:'medium',why:'需要统一分类、提炼主题和去重',tip:'保留来源以便追溯'},
-    {name:'业务周报与项目复盘',cat:'办公',difficulty:'中等',tier:'medium',why:'需要组织信息并提取行动项',tip:'区分事实、问题与下一步'}
-  ];
-  const level = {
-    flagship:{label:'旗舰深推理',css:'flagship'},
-    high:{label:'高推理',css:'high'},
-    medium:{label:'中等推理',css:'medium'},
-    light:{label:'轻量快速',css:'light'}
-  };
-  let category='all';
-  let search='';
-  function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-  function render(){
-    const rows=tasks.filter(t=>(category==='all'||t.cat===category) && [t.name,t.cat,t.difficulty,t.why,t.tip,level[t.tier].label].some(s=>s.toLowerCase().includes(search)));
-    $('#visibleCount').textContent=rows.length+' 项';
-    $('#tableInfo').textContent='当前展示 '+rows.length+' / '+tasks.length+' 项';
-    $('#taskRows').innerHTML=rows.length ? rows.map((t,i)=>`<tr><td>${i+1}</td><td><span class="task-title">${escapeHtml(t.name)}</span><small class="task-cat">${escapeHtml(t.cat)}</small></td><td><span class="difficulty">${escapeHtml(t.difficulty)}</span></td><td><span class="tier-pill ${level[t.tier].css}">${level[t.tier].label}</span></td><td>${escapeHtml(t.why)}</td><td>${escapeHtml(t.tip)}</td></tr>`).join('') : '<tr><td class="empty" colspan="6">没有找到相关任务，请换个关键词。</td></tr>';
+  const rows = [["6 Astra Max",53,326,"极复杂研究、旗舰级交付"],["6.1 Sol Max",52,72,"高难推理、复杂项目终稿"],["6 Astra 极高",52,231,"疑难研究、复杂方案复核"],["6.1 Sol 极高",51,39,"复杂项目、精细终稿"],["6 Astra 高",51,173,"重要决策、复杂交付"],["6.1 Sol 高",50,32,"专业交付、复杂材料"],["6 Astra 中",50,154,"跨工具项目、长期规划"],["6.1 Sol 中",48,21,"日常办公、开发研究"],["6 Sol Max",48,104,"深度代码、系统设计"],["5.6 Sol Max",47,199,"旧项目深度审查"],["6 Astra 轻度",46,82,"高质量改写、快速审稿"],["6 Sol 极高",44,52,"复杂代码、严格校验"],["5.6 Sol 极高",44,118,"深度代码审查、旧项目"],["6.1 Sol 轻度",42,13,"快速改写、重点检查"],["6 Sol 高",42,37,"专业开发、复杂文档"],["5.6 Sol 高",42,81,"专业写作、旧项目维护"],["5.6 Terra Max",42,140,"大型资料整合、深度分析"],["6 Sol 中",40,25,"日常编程、研究整理"],["5.6 Sol 中",39,50,"文档撰写、常规开发"],["5.6 Terra 极高",38,63,"多文件资料分析"],["6 Luna Max",38,7,"高性价比批量分析"],["5.6 Luna Max",37,18,"批量摘要、内容整理"],["6 Luna 极高",35,4,"明确约束下的推理"],["5.6 Luna 极高",35,9,"结构化摘要、批处理"],["6 Sol 轻度",34,13,"小改动、重点检查"],["5.6 Terra 高",34,34,"长文归纳、一般分析"],["5.6 Sol 轻度",33,26,"简单代码、小篇写作"],["6 Luna 高",33,3,"批量总结、日常整理"],["5.6 Luna 高",32,4,"结构化摘要、批处理"],["5.6 Terra 中",30,18,"常规资料整理"],["6 Luna 中",30,2,"清晰指令下的改写"],["5.6 Terra 轻度",27,14,"基础归纳、简单问答"],["5.6 Luna 中",25,2,"批量分类、格式转换"],["6 Luna 轻度",22,0.45,"关键词提取、任务分流"],["5.6 Luna 轻度",21,1,"简单提取、格式整理"]];
+  const catalog = rows.map(([name,score,cost,purpose],id) => {
+    const family=name.startsWith('6.1 ')?'6.1':name.startsWith('5.6 ')?'5.6':'6';
+    const type=/Astra/.test(name)?'astra':/Terra/.test(name)?'terra':/Luna/.test(name)?'luna':'sol';
+    const badge=name==='6 Astra Max'?'旗舰质量':name==='6.1 Sol 高'?'质量甜点位':name==='6.1 Sol 中'?'日常甜点位':name==='6 Luna 高'?'省钱甜点位':'';
+    return {id,name,score,cost,purpose,family,type,badge};
+  });
+  const icon={astra:'◉',sol:'☀',terra:'◈',luna:'☾'};
+  const $ = selector => document.querySelector(selector);
+  const $$ = selector => [...document.querySelectorAll(selector)];
+  let family='all',sort='score',search='';
+  const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function filtered(){
+    const q=search.trim().toLocaleLowerCase();
+    return catalog.filter(r=>(family==='all'||r.family===family)&&(!q||[r.name,r.purpose,r.badge].some(s=>s.toLocaleLowerCase().includes(q))))
+      .sort((a,b)=>sort==='score'?b.score-a.score||a.cost-b.cost:sort==='cost'?a.cost-b.cost||b.score-a.score:a.name.localeCompare(b.name,'zh-CN'));
   }
-  $('#taskCount').innerHTML=tasks.length+' <em>项</em>';
-  $$('.tab').forEach(button=>button.addEventListener('click',()=>{
-    category=button.dataset.category;
-    $$('.tab').forEach(t=>{t.classList.toggle('active',t===button);t.setAttribute('aria-pressed',String(t===button));});
+  function render(){
+    const items=filtered(),table=$('#rankingRows'),mobile=$('#mobileCards');
+    $('#resultInfo').textContent='显示 '+items.length+' / '+catalog.length+' 项';
+    $('#heroCount').textContent=catalog.length;
+    $('#empty').hidden=items.length!==0;
+    table.innerHTML=items.map((r,i)=>`<tr class="${r.type}"><td>${i+1}</td><td><span class="model-icon"><span>${icon[r.type]}</span></span><span class="model-name">${escapeHtml(r.name)}</span>${r.badge?`<span class="pill"><span>${escapeHtml(r.badge)}</span></span>`:''}</td><td>${r.score}</td><td>≈ ${r.cost}</td><td>${escapeHtml(r.purpose)}</td></tr>`).join('');
+    mobile.innerHTML=items.map((r,i)=>`<article class="model-card ${r.type}"><div class="model-card-head"><div class="model-card-name"><span class="model-icon"><span>${icon[r.type]}</span></span>${escapeHtml(r.name)}</div><strong>#${i+1}</strong></div>${r.badge?`<span class="pill"><span>${escapeHtml(r.badge)}</span></span>`:''}<div class="model-card-stat"><div><small>参考智能指数</small><strong>${r.score}</strong></div><div><small>参考相对消耗</small><strong>≈ ${r.cost}</strong></div></div><div class="model-card-note">${escapeHtml(r.purpose)}</div></article>`).join('');
+  }
+  $$('.filter').forEach(btn=>btn.addEventListener('click',()=>{
+    family=btn.dataset.family;
+    $$('.filter').forEach(b=>{b.classList.toggle('active',b===btn);b.setAttribute('aria-pressed',String(b===btn));});
     render();
   }));
-  $('#searchInput').addEventListener('input',e=>{search=e.target.value.trim().toLowerCase();render();});
-  $('#printPage').addEventListener('click',()=>window.print());
-  let toastHandle;
-  function toast(message){const el=$('#toast');el.textContent=message;el.hidden=false;clearTimeout(toastHandle);toastHandle=setTimeout(()=>el.hidden=true,2600);}
-  $('#copyLink').addEventListener('click',async()=>{
-    try{
-      if(navigator.clipboard && location.protocol!=='file:')await navigator.clipboard.writeText(location.href.split('#')[0]);
-      else {const tmp=document.createElement('textarea');tmp.value=location.href.split('#')[0];document.body.appendChild(tmp);tmp.select();if(!document.execCommand('copy'))throw new Error('Clipboard unavailable');tmp.remove();}
-      toast('已复制网站地址，可以发给朋友。');
-    }catch(e){toast('复制失败，请从浏览器地址栏复制网址。');}
+  $('#sort').addEventListener('change',e=>{sort=e.target.value;render();});
+  $('#search').addEventListener('input',e=>{search=e.target.value;render();});
+  let toastTimer;
+  function toast(text){const t=$('#toast');t.textContent=text;t.hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.hidden=true,2400);}
+  $('#shareBtn').addEventListener('click',async()=>{
+    const url=location.href.split('#')[0];
+    try{if(navigator.share)await navigator.share({title:'MODEL ATLAS 模式选用参考表',url});
+    else if(navigator.clipboard) {await navigator.clipboard.writeText(url);toast('链接已复制，可以分享给朋友');}
+    else{toast('请复制浏览器地址栏中的网址');}}
+    catch(e){if(e?.name!=='AbortError')toast('请复制浏览器地址栏中的网址');}
   });
-  function fmtDate(d){const x=new Date(d);return Number.isNaN(x.getTime())?'待首次检查':new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(x);}
-  // These are *link health checks*, not benchmark updates or model scores.
-  fetch('./data/source-status.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('unavailable');return r.json();}).then(meta=>{
-    $('#checkDate').textContent=fmtDate(meta.checked_at);
-    if(!meta.checked_at){$('#checkStatus').textContent='上线后首次定时检查';return;}
-    const ok=(meta.targets||[]).filter(t=>t.ok).length;
-    $('#checkStatus').textContent=`来源链接可访问 ${ok} / ${(meta.targets||[]).length}`;
-    $('#footerUpdate').textContent='LINK CHECK · '+fmtDate(meta.checked_at);
-  }).catch(()=>{$('#checkDate').textContent='未检测';$('#checkStatus').textContent='打开网页后显示链接检查状态';});
   render();
 })();
-
