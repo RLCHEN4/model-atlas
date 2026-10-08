@@ -1,84 +1,74 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#f5f8fc" />
-  <meta name="description" content="MODEL ATLAS · 独立 AI 模型选用指南。按任务难度选择推理档位，并前往官方来源查看实时测评。" />
-  <meta property="og:title" content="MODEL ATLAS · AI 模型选用指南" />
-  <meta property="og:description" content="面向团队的免费模型选型参考：研究、编程、写作与日常任务，一站式对照。" />
-  <meta property="og:type" content="website" />
-  <title>MODEL ATLAS · AI 模型选用指南</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f8fbff">
+  <meta name="description" content="MODEL ATLAS GPT 模式选用参考表。35种参考模式，彩色排行榜、筛选、比较与任务选型提示。参考数字未核验。">
+  <title>MODEL ATLAS｜GPT 模式选用参考表（预览）</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
 </head>
 <body>
-<div class="topline"></div>
-<header class="site-header shell" id="top">
-  <a class="brand" href="#top" aria-label="MODEL ATLAS 首页"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>MODEL<span class="brand-thin"> ATLAS</span><small>AI DECISION GUIDE</small></span></a>
-  <div class="header-links"><span class="public-label"><i></i> 免费公开版</span><a class="source-btn" href="https://artificialanalysis.ai/models" target="_blank" rel="noopener noreferrer">查看原站榜单 <span>↗</span></a></div>
-</header>
-<main class="shell">
-  <section class="hero" aria-labelledby="headline">
-    <div class="hero-copy">
-      <p class="eyebrow"><span class="eyebrow-dot"></span> MODEL SELECTION PLAYBOOK <span class="eyebrow-line"></span> PUBLIC EDITION</p>
-      <h1 id="headline">选对推理档位，<br/><span class="gradient-text">把精力花在重点上。</span></h1>
-      <p class="hero-desc">从高难研究到批量整理，把常见任务映射到四种推理策略。<br class="only-desktop"/>无需看懂复杂跑分，也能快速找到合适的工作方式。</p>
-      <div class="hero-actions"><a class="btn btn-primary" href="#tasks">按任务选择 <span>↘</span></a><button class="btn btn-white" type="button" id="copyLink">复制分享链接 <span>↗</span></button></div>
-    </div>
-    <div class="hero-board" aria-label="四种推理档位及用途">
-      <div class="board-title"><div><small>FOUR MODES · AT A GLANCE</small><h2>四档策略，一眼看懂</h2></div><span class="board-label">GUIDE</span></div>
-      <div class="tier-bars">
-        <div class="tier-bar"><span class="tier-mark purple">✦</span><div><b>旗舰深推理</b><small>复杂研究 · 多轮审查</small></div><span class="bar-track"><i class="bar-purple" style="width:100%"></i></span></div>
-        <div class="tier-bar"><span class="tier-mark orange">✺</span><div><b>高推理</b><small>专业交付 · 疑难任务</small></div><span class="bar-track"><i class="bar-orange" style="width:77%"></i></span></div>
-        <div class="tier-bar"><span class="tier-mark blue">◕</span><div><b>中等推理</b><small>日常办公 · 开发研究</small></div><span class="bar-track"><i class="bar-blue" style="width:55%"></i></span></div>
-        <div class="tier-bar"><span class="tier-mark green">◈</span><div><b>轻量快速</b><small>批量分类 · 格式处理</small></div><span class="bar-track"><i class="bar-green" style="width:31%"></i></span></div>
-      </div>
-      <p class="board-note">彩条为任务复杂度的示意图，不是模型跑分或性能测量。</p>
-    </div>
-  </section>
-
-  <div class="notice" role="note"><span class="notice-icon">ⓘ</span><p><b>独立选型建议 · 非官方排行榜</b>　本站不提供未经授权的第三方测评分数、任务成本或批量数据下载。需要实时榜单时，请使用原始数据源链接。</p><a href="#sources">数据说明 ↓</a></div>
-
-  <section class="stat-grid" aria-label="内容概览">
-    <article class="stat"><span class="stat-label">选型策略 <small>01 / STRATEGY</small></span><strong>04 <em>档</em></strong><p>按任务复杂度灵活选择</p></article>
-    <article class="stat"><span class="stat-label">任务模板 <small>02 / PLAYBOOK</small></span><strong id="taskCount">— <em>项</em></strong><p>编程、创作、研究与运营</p></article>
-    <article class="stat"><span class="stat-label">发布方式 <small>03 / HOSTING</small></span><strong>FREE</strong><p>GitHub Pages 免费分享</p></article>
-    <article class="stat"><span class="stat-label">链接检测 <small>04 / LINK CHECK</small></span><strong class="stat-date" id="checkDate">待检查</strong><p id="checkStatus">每日检查来源链接状态</p></article>
-  </section>
-
-  <section class="section-spacer" aria-labelledby="recs-title">
-    <div class="section-heading"><div><span class="section-kicker">OUR PICKS / 选型策略</span><h2 id="recs-title">四种任务档位，<em>各有所长。</em></h2></div><p>建议从任务目标出发，不是从数字排名出发。</p></div>
-    <div class="pick-grid">
-      <article class="pick pick-purple"><span class="pick-icon">✦</span><small>FLAGSHIP · 深度研究</small><h3>旗舰深推理</h3><p>难题拆解、多阶段调研、关键成果复核。适合准确性比速度更重要的任务。</p><span class="pick-footer">细致推理 · 重视复核</span></article>
-      <article class="pick pick-orange"><span class="pick-icon">✺</span><small>QUALITY · 专业交付</small><h3>高推理</h3><p>复杂代码、正式方案、精细终稿。质量要求较高时优先考虑。</p><span class="pick-footer">复杂问题 · 较高质量</span></article>
-      <article class="pick pick-blue"><span class="pick-icon">◕</span><small>EVERYDAY · 日常均衡</small><h3>中等推理</h3><p>日常研究、普通开发、内容策划。兼顾响应速度与处理深度。</p><span class="pick-footer">常规任务 · 平衡效率</span></article>
-      <article class="pick pick-green"><span class="pick-icon">◈</span><small>FAST · 批量执行</small><h3>轻量快速</h3><p>批量改写、分类、摘要、结构化提取。指令清晰时尤其适合。</p><span class="pick-footer">流程明确 · 优先速度</span></article>
-    </div>
-  </section>
-
-  <section class="section-spacer" id="tasks" aria-labelledby="tasks-title">
-    <div class="section-heading"><div><span class="section-kicker">TASK MATCHING / 任务速查</span><h2 id="tasks-title">按工作任务挑选，<em>不必先研究参数。</em> <span class="count" id="visibleCount"></span></h2></div><button class="outline-btn" id="printPage" type="button">打印 / 保存 PDF ↗</button></div>
-    <div class="table-panel">
-      <div class="filterbar"><div class="tabs" role="group" aria-label="任务类别"><button type="button" class="tab active" data-category="all" aria-pressed="true">全部</button><button type="button" class="tab" data-category="研究" aria-pressed="false">研究</button><button type="button" class="tab" data-category="开发" aria-pressed="false">开发</button><button type="button" class="tab" data-category="创作" aria-pressed="false">创作</button><button type="button" class="tab" data-category="办公" aria-pressed="false">办公</button></div><label class="search">⌕ <input id="searchInput" type="search" placeholder="搜索任务、关键词…" aria-label="搜索任务" /></label></div>
-      <div class="table-scroll"><table><thead><tr><th>序号</th><th>工作任务</th><th>复杂度</th><th>优先策略</th><th>选择理由</th><th>补充建议</th></tr></thead><tbody id="taskRows"></tbody></table></div>
-      <div class="table-bottom"><span>这些是原创工作流建议，不是官方性能评测。</span><span id="tableInfo">请选择工作场景</span></div>
-    </div>
-  </section>
-
-  <section class="section-spacer knowledge" id="sources" aria-labelledby="sources-title">
-    <div><span class="section-kicker">SOURCES / 数据与使用说明</span><h2 id="sources-title">真正的实时指标，<br/><em>请到原始页面查看。</em></h2><p>模型名称、可用档位以及测评方法可能变化。本站不镜像第三方数据库，也不把示意数字当作实测结果。</p></div>
-    <div class="source-grid">
-      <a class="source-tile" href="https://artificialanalysis.ai/models" target="_blank" rel="noopener noreferrer"><small>INDEPENDENT BENCHMARKS</small><strong>Artificial Analysis</strong><span>查看实时智能指数、速度与成本 →</span></a>
-      <a class="source-tile" href="https://platform.openai.com/docs/models" target="_blank" rel="noopener noreferrer"><small>MODEL REFERENCE</small><strong>OpenAI 模型文档</strong><span>查看官方模型规格与可用信息 →</span></a>
-      <a class="source-tile" href="https://help.openai.com/" target="_blank" rel="noopener noreferrer"><small>PRODUCT HELP</small><strong>ChatGPT 帮助中心</strong><span>查看产品中的模型选择与功能 →</span></a>
-    </div>
-  </section>
-
-  <footer class="footer"><div><strong>MODEL ATLAS <span>/ PUBLIC</span></strong><p>为朋友与团队制作的独立 AI 模型选用指南。本站非 OpenAI 或 Artificial Analysis 官方产品。</p><small>任务建议由本站整理。未使用或发布 Artificial Analysis API 数据、测评分数、排名或原始数据文件。</small></div><div class="footer-right"><span id="footerUpdate">CONTENT · EDITORIAL</span><a href="#top">返回顶部 ↑</a></div></footer>
-</main>
-<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <div class="page-shell">
+    <header class="site-header">
+      <a href="#top" class="brand" aria-label="MODEL ATLAS 返回首页">
+        <span class="brand-icon">✦</span><span>MODEL <b>ATLAS</b></span>
+      </a>
+      <nav class="quick-nav" aria-label="页面导航">
+        <a href="#ranking">模式排名</a><a href="#sweetspots">甜点位</a><a href="#guide">使用说明</a>
+      </nav>
+      <button class="share-btn" id="shareBtn" type="button">↗ 分享网站</button>
+    </header>
+    <main id="top">
+      <section class="hero" aria-labelledby="title">
+        <div class="hero-eyebrow"><span class="pulse"></span> MODEL ATLAS · 35 模式对照</div>
+        <h1 id="title">GPT-6.1 / GPT-6 / GPT-5.6<br><span>模式选用参考表</span></h1>
+        <p class="hero-caption">沿用你喜欢的彩色信息图：按参考智能指数排序，比较任务消耗，快速定位适合的模式。</p>
+        <div class="hero-ribbon">单模型参考智能指数从高到低 <i></i> 相对任务消耗仅供参考</div>
+        <div class="hero-meta"><span>参考表视觉重制 · 2026.10.08</span><span>覆盖 <strong id="heroCount">35</strong> 个示例模式</span></div>
+        <div class="notice" role="note"><span class="notice-icon">!</span><div><strong>数据状态：参考示例，未经官方逐项核验</strong><p>名称、分数和成本来自此前对话整理的参考表，不是已确认的实时基准数据。筛选和排序功能可用，但结果不能视为官方排名或 API 计费价格。</p></div></div>
+      </section>
+      <section class="dashboard" id="ranking" aria-labelledby="rankTitle">
+        <div class="section-head"><div><span class="overline">01 / MODEL RANKINGS</span><h2 id="rankTitle">完整模式排名 <span class="section-count">35 个模式</span></h2><p>紫色 Astra · 橙色 Sol · 绿色 Terra · 蓝色 Luna</p></div><div class="rank-note">示例数值 · 持续待核验</div></div>
+        <div class="toolbar">
+          <div class="filter-group" role="group" aria-label="模型系列筛选">
+            <button type="button" class="filter active" data-family="all" aria-pressed="true">全部</button>
+            <button type="button" class="filter" data-family="6.1" aria-pressed="false">GPT-6.1</button>
+            <button type="button" class="filter" data-family="6" aria-pressed="false">GPT-6</button>
+            <button type="button" class="filter" data-family="5.6" aria-pressed="false">GPT-5.6</button>
+          </div>
+          <div class="toolbar-right">
+            <label class="search-box"><span aria-hidden="true">⌕</span><input type="search" id="search" placeholder="搜索模式或任务..." aria-label="搜索模式和任务"></label>
+            <label class="sort-box"><span>排序</span><select id="sort"><option value="score">智能指数 ↓</option><option value="cost">相对消耗 ↑</option><option value="name">名称 A–Z</option></select></label>
+          </div>
+        </div>
+        <div class="table-summary"><span id="resultInfo">显示 35 / 35 项</span><span class="hint">指数越高越好，消耗越低越省（均为示例）</span></div>
+        <div class="table-container"><table class="ranking-table">
+          <thead><tr><th scope="col">名次</th><th scope="col">模式</th><th scope="col">参考智能指数</th><th scope="col">参考相对消耗</th><th scope="col">最适合做什么</th></tr></thead>
+          <tbody id="rankingRows"></tbody>
+        </table></div>
+        <div id="mobileCards" class="mobile-cards"></div>
+        <div id="empty" class="empty" hidden>没有找到符合条件的模式，可以换个关键词。</div>
+        <div class="data-footnote">注：原图消耗采用 “1 ≈ 每任务 $0.01” 的示意换算，非任何 ChatGPT 订阅额度，也不是实时 API 报价。相同指数下使用参考消耗进行顺序比较。</div>
+      </section>
+      <section class="spots" id="sweetspots" aria-labelledby="spotsTitle">
+        <div class="section-head"><div><span class="overline">02 / QUICK PICKS</span><h2 id="spotsTitle">四个参考甜点位</h2><p>根据原图定位总结的选择建议，非官方等级或能力测评。</p></div></div>
+        <div class="spot-grid">
+          <article class="spot purple"><span class="spot-icon">◉</span><div class="spot-kicker">旗舰质量</div><h3>6 Astra Max</h3><p>高难研究、复杂方案复核</p><span class="spot-sub">优先复杂度，而非成本</span></article>
+          <article class="spot orange"><span class="spot-icon">☀</span><div class="spot-kicker">质量甜点位</div><h3>6.1 Sol 高</h3><p>专业交付、复杂材料</p><span class="spot-sub">质量与投入的参考平衡</span></article>
+          <article class="spot amber"><span class="spot-icon">☀</span><div class="spot-kicker">日常甜点位</div><h3>6.1 Sol 中</h3><p>日常办公、开发研究</p><span class="spot-sub">多数常规任务的起点</span></article>
+          <article class="spot blue"><span class="spot-icon">☾</span><div class="spot-kicker">省钱甜点位</div><h3>6 Luna 高</h3><p>批量总结、日常整理</p><span class="spot-sub">规则清晰的批量任务</span></article>
+        </div>
+      </section>
+      <section class="guide" id="guide" aria-labelledby="guideTitle">
+        <div><span class="overline">03 / ABOUT THE DATA</span><h2 id="guideTitle">关于这份参考表</h2><p>这份预览恢复了你提供的视觉和对话里整理的 35 个模式示例。展示数据尚未经过官方接口逐项确认，所以没有标注为“最新官方数据”。</p><p>正式面向公众分享之前，建议核验每个模型是否真实提供、对应推理档位、评分方法和成本含义；若引用第三方受许可限制的数据，需要获得适当授权。网站现有每日自动任务只检测参考链接是否可访问，不会每天刷新分数。</p></div>
+        <aside class="source-card"><div class="source-header">参考与说明 <span>↗</span></div><a target="_blank" rel="noopener noreferrer" href="https://artificialanalysis.ai/models">Artificial Analysis · 模型页面</a><a target="_blank" rel="noopener noreferrer" href="https://platform.openai.com/docs/models">OpenAI · 模型文档</a><a target="_blank" rel="noopener noreferrer" href="https://github.com/RLCHEN4/model-atlas">MODEL ATLAS · GitHub 仓库</a><small>链接仅供核对来源；本页数值不应被视为对上述来源的实时引用。</small></aside>
+      </section>
+    </main>
+    <footer class="site-footer"><span>© MODEL ATLAS · 模型选用参考</span><span>参考数据尚未核验 · <a href="https://github.com/RLCHEN4/model-atlas" target="_blank" rel="noopener noreferrer">在 GitHub 查看</a></span></footer>
+  </div>
+  <div class="toast" id="toast" role="status" hidden>链接已复制</div>
 </body>
 </html>
