@@ -1,4 +1,17 @@
 {
-  "checked_at": null,
-  "targets": []
+  "checked_at": "2026-10-08T07:06:25+00:00",
+  "targets": [
+    {
+      "name": "Artificial Analysis models",
+      "ok": true
+    },
+    {
+      "name": "OpenAI model docs",
+      "ok": true
+    },
+    {
+      "name": "ChatGPT help",
+      "ok": false
+    }
+  ]
 }
