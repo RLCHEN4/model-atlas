@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f6f8fc">
-  <meta name="description" content="MODEL ATLAS：GPT 参考模式与 Claude Opus 对比。保留 35 条 GPT 演示数据，新增 Opus 5.5 / 5 的官方规格、API 费率及推理档位；缺少同口径数据的项目不参与排名。">
+  <meta name="description" content="MODEL ATLAS：GPT 参考模式与 Claude Opus 对比。保留 35 条 GPT 演示数据，补充 Opus 5.5 五档 AA Intelligence Index v4.3.2 分数与每任务成本（2026-10-09，Default Fallback）。GPT 示例未核验；Opus 5 本轮未摘录。">
   <title>MODEL ATLAS · GPT × Claude Opus 模型对比</title>
   
   <style>
@@ -97,13 +97,24 @@
 @media(max-width:540px){.opus-model-grid{grid-template-columns:1fr}.compare-cards{grid-template-columns:1fr}.compare-cards .comparison-field:last-of-type{min-height:0}.opus-model-card{padding:19px}.tab-group{justify-content:flex-start;gap:2px}.filter-tab{padding:8px 10px}.status-banner .status-right{width:100%}.compare-card .source-detail{min-height:0}}
 @media print{.opus-actions{display:none}.opus-section{margin-top:20px}.opus-model-grid{grid-template-columns:repeat(2,1fr)}.opus-model-card{padding:12px}.opus-price-grid{margin:10px 0}}
 
+
+/* Five cited Opus 5.5 figures, not an automated third-party dataset mirror. */
+.family-opus .score-val{color:#a65e46}.family-opus .relative-cell{color:#a66f56}
+.bar-fill.opus{background:linear-gradient(90deg,#b7674e,#d48c6e)}
+.pick.opus{background:linear-gradient(128deg,#fff9f3,#f9e9df);border-color:#eed6c8}
+.pick.opus .pick-symbol{background:#bf7055}.pick.opus .pick-tag{color:#a46a52}.pick.opus h3{color:#97583f}.pick.opus p{color:#8d6552}
+.pick-citation{font-size:10px;line-height:1.55;color:#896e60;margin-top:8px}
+.benchmark-attribution{display:block;font-size:11px;letter-spacing:0;line-height:1.7;color:#627591}
+.benchmark-attribution>span{display:block}.benchmark-attribution a{color:#466b9e;text-decoration:underline}
+.opus-disclosure a,.board-footer a{text-decoration:underline}
+
 </style>
 </head>
 <body>
   <div class="topline"></div>
   <header class="site-header shell">
     <a class="brand" href="#top" aria-label="MODEL ATLAS 首页"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span>MODEL<span class="brand-light"> ATLAS</span><small>MODEL COMPARISON</small></span></a>
-    <div class="top-right"><span class="mini-label"><span class="ping"></span>GPT 参考 / Opus 官方规格</span><a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener noreferrer" class="source-btn">核验来源 <span aria-hidden="true">↗</span></a></div>
+    <div class="top-right"><span class="mini-label"><span class="ping"></span>GPT 参考 / Opus 5.5 测评快照</span><a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener noreferrer" class="source-btn">核验来源 <span aria-hidden="true">↗</span></a></div>
   </header>
 
   <main id="top" class="shell">
@@ -111,13 +122,13 @@
       <div class="hero-copy">
         <div class="eyebrow"><span class="dot-fill"></span> GPT × CLAUDE OPUS <span class="eyebrow-line"></span> <span>2026 EDITION</span></div>
         <h1 id="headline">选对模型，<br><span class="gradient-word">每次推理都更值。</span></h1>
-        <p>保留 GPT 全模式参考，加入 Claude Opus 5.5 / 5。<br class="desktop-br">同屏比较推理档位、适用场景与官方 API 费率。</p>
+        <p>保留 GPT 全模式参考，加入 Claude Opus 5.5 / 5。<br class="desktop-br">Opus 5.5 分数与任务成本已补齐，GPT 仍为参考示例。</p>
         <div class="hero-actions"><a href="#leaderboard" class="main-cta">查看完整榜单 <span aria-hidden="true">↘</span></a><button type="button" class="ghost-cta" id="downloadCsv">导出对比 CSV <span aria-hidden="true">↓</span></button></div>
       </div>
       <div class="hero-chart" aria-label="前五名模型智能指数条形图">
-        <div class="chart-header"><div><span class="overline">REFERENCE SNAPSHOT</span><h2>智能表现 <span class="sparkline">↗</span></h2></div><span class="chart-pill">TOP 5</span></div>
+        <div class="chart-header"><div><span class="overline">REFERENCE COMPARISON</span><h2>智能指数 <span class="sparkline">↗</span></h2></div><span class="chart-pill">TOP 5</span></div>
         <div id="heroBars" class="chart-bars"><div class="bar-skeleton"></div><div class="bar-skeleton"></div><div class="bar-skeleton"></div><div class="bar-skeleton"></div><div class="bar-skeleton"></div></div>
-        <div class="chart-footer"><span>MODEL ATLAS · DEMONSTRATION SCORES</span><span>GPT DEMO ONLY ↗</span></div>
+        <div class="chart-footer benchmark-attribution"><span>本站收录项的参考 TOP 5 · 非全站官方排名</span><span>Opus: <a href="https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-sol-vs-claude-opus-5-5" target="_blank" rel="noopener noreferrer">Artificial Analysis Intelligence Index v4.3.2 ↗</a><br>2026-10-09 · Default Fallback · GPT：未核验示例</span></div>
       </div>
     </section>
 
@@ -127,7 +138,7 @@
       <article class="metric"><span class="metric-label">已收录模式 <span>01 / COVERAGE</span></span><div class="metric-value" id="modelCount">— <small>个</small></div><p>35 个 GPT 参考 + 10 个 Opus 档位</p></article>
       <article class="metric"><span class="metric-label">参考最高智能指数 <span>02 / PEAK</span></span><div class="metric-value" id="topScore">— <small>pts</small></div><p id="topModel">等待数据</p></article>
       <article class="metric"><span class="metric-label">示例最低任务成本 <span>03 / EFFICIENCY</span></span><div class="metric-value" id="minCost">— <small>USD</small></div><p id="minCostModel">等待数据</p></article>
-      <article class="metric"><span class="metric-label">Opus 规格核对 <span>04 / UPDATE</span></span><div class="metric-value small-time" id="lastCheck">—</div><p id="versionLabel">数据版本待获取</p></article>
+      <article class="metric"><span class="metric-label">Opus 测评摘录 <span>04 / UPDATE</span></span><div class="metric-value small-time" id="lastCheck">—</div><p id="versionLabel">数据版本待获取</p></article>
     </section>
 
     <section class="recommendation" aria-labelledby="rec-title">
@@ -138,7 +149,7 @@
 <section class="opus-section" aria-labelledby="opus-title">
 <div class="section-top"><div><span class="section-kicker">NEW / CLAUDE OPUS</span><h2 id="opus-title">加入 Opus，<em>一起看差异。</em></h2></div><p>Anthropic 官方规格与费率 · 核对于 2026-10-09</p></div>
 <div class="opus-model-grid" id="opusModels"></div>
-<p class="opus-disclosure">同一型号的五档 effort 共用 token 单价，但消耗量不同；Max 不等于固定任务费用。评分与每任务成本尚未接入的 Opus 不参与排名，可照常勾选对比。</p>
+<p class="opus-disclosure">Opus 5.5 五档分数与每任务成本摘录自 <a href="https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-sol-vs-claude-opus-5-5" target="_blank" rel="noopener noreferrer">Artificial Analysis ↗</a>，Intelligence Index v4.3.2，2026-10-09，全部为 Default Fallback。任务成本不是 token 单价；相对消耗 = 每任务美元成本 ÷ 0.01。Opus 5 本轮未摘录，仍不排名。</p>
 </section>
     <section id="leaderboard" class="board-section" aria-labelledby="board-title">
       <div class="section-top board-top"><div><span class="section-kicker">THE FULL RANKING / 完整榜单</span><h2 id="board-title">模型能力排行榜 <span class="board-count" id="filteredCount">—</span></h2></div><button type="button" class="print-btn" id="printPage">打印 / 保存 PDF <span aria-hidden="true">↗</span></button></div>
@@ -158,17 +169,17 @@
         </div>
         <div class="table-scroll-hint" aria-hidden="true"><span>左右滑动表格，查看成本、任务与对比</span><span>↔</span></div>
         <div class="table-scroller" tabindex="0" role="region" aria-label="完整排行榜，可左右滚动查看所有列"><table class="ranking-table"><thead><tr><th scope="col" class="col-rank">名次</th><th scope="col" class="col-model">模型 / 推理模式</th><th scope="col" class="col-index">智能指数 <small>↑ 更高更好</small></th><th scope="col" class="col-usd">任务成本 <small>USD / task</small></th><th scope="col" class="col-relative">相对消耗 <small>以 $0.01 为 1</small></th><th scope="col" class="col-best">最适合做什么</th><th scope="col" class="col-compare">对比</th></tr></thead><tbody id="rankingRows"><tr><td colspan="7" class="empty-row">正在读取数据…</td></tr></tbody></table></div>
-        <div class="board-footer"><span>GPT 数值为未核验示例 · Opus 未接入同口径评测，不参与数值排名</span><span id="tableFoot">按智能指数降序</span></div>
+        <div class="board-footer"><span>Opus 5.5: <a href="https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-sol-vs-claude-opus-5-5" target="_blank" rel="noopener noreferrer">Source: Artificial Analysis ↗</a> · Intelligence Index v4.3.2 · 2026-10-09 · Default Fallback<br>GPT 为未核验示例；此混合参考表不是 AA 官方排名。</span><span id="tableFoot">按智能指数降序</span></div>
       </div>
     </section>
 
-    <section class="explain" aria-labelledby="explain-title"><div><span class="section-kicker">METHODOLOGY / 指标说明</span><h2 id="explain-title">看懂这几个数字，<br><em>就知道该选谁。</em></h2></div><div class="explain-grid"><article><span class="explain-num">01</span><h3>智能指数</h3><p>GPT 指数来自原演示快照，未核验。Opus 暂未接入同一基准版本的分数，用“待接入”表示，不按零分处理，也不参与名次或性价比排序。</p></article><article><span class="explain-num">02</span><h3>平均任务成本</h3><p>GPT 任务成本为未核验示例。Opus 官方价格按每百万 token 计价，在对比面板单列；未实测的任务成本留空，不能用 token 单价换算代替。</p></article><article><span class="explain-num">03</span><h3>相对消耗</h3><p>演示任务成本 ÷ $0.01 的示意值，沿用你原来参考图的形式；非真实结算或官方额度。</p></article></div></section>
+    <section class="explain" aria-labelledby="explain-title"><div><span class="section-kicker">METHODOLOGY / 指标说明</span><h2 id="explain-title">看懂这几个数字，<br><em>就知道该选谁。</em></h2></div><div class="explain-grid"><article><span class="explain-num">01</span><h3>智能指数</h3><p>Opus 5.5 引用 Artificial Analysis Intelligence Index v4.3.2，2026-10-09，Default Fallback。GPT 保留未核验示例。不同基准版本的分数不能直接比较；未摘录项目不按零分处理。</p></article><article><span class="explain-num">02</span><h3>平均任务成本</h3><p>Opus 5.5 显示 AA 的 Cost per Intelligence Index task（加权平均任务成本）；GPT 为未核验示例。每百万 token 的官方 API 单价另列，不能替代任务成本。</p></article><article><span class="explain-num">03</span><h3>相对消耗</h3><p>每任务美元成本 ÷ $0.01。例如 Opus 5.5 Max 的 $5.98 对应约 598。来自 2026-10-09 的 AA v4.3.2 / Default Fallback 快照，非订阅额度或实际账单。</p></article></div></section>
 
-    <footer class="footer"><div class="foot-left"><div class="footer-logo">MODEL ATLAS<span> / DAILY</span></div><p>GPT 参考示例 + Opus 官方规格，不是实时测评榜单。本站非 OpenAI、Anthropic 或 Artificial Analysis 官方产品。</p><p class="legal">外部指标核验入口（本站数值并非实时引入）： <a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener noreferrer">Artificial Analysis ↗</a> · Subject to source licensing terms.</p></div><div class="foot-right"><span id="footerFreshness">DATA SYNC · AWAITING</span><a href="#top">返回顶部 ↑</a></div></footer>
+    <footer class="footer"><div class="foot-left"><div class="footer-logo">MODEL ATLAS<span> / DAILY</span></div><p>GPT 参考示例 + Opus 5.5 测评摘录 + Opus 官方规格，不是实时测评榜单。本站非 OpenAI、Anthropic 或 Artificial Analysis 官方产品。</p><p class="legal">Opus 5.5 测评摘录来源（v4.3.2 / 2026-10-09 / Default Fallback）： <a href="https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-sol-vs-claude-opus-5-5" target="_blank" rel="noopener noreferrer">Artificial Analysis ↗</a> · 非商业选型参考；仅引用本次五个配置的公开结果，不启用批量抓取或数据 API 再分发。</p></div><div class="foot-right"><span id="footerFreshness">DATA SYNC · AWAITING</span><a href="#top">返回顶部 ↑</a></div></footer>
   </main>
 
   <div id="compareDock" class="compare-dock" hidden><span><strong id="compareNum">0</strong> 个模型已选择</span><button id="clearCompare" class="dock-clear" type="button">清空</button><button id="openCompare" class="dock-open" type="button">开始对比 <span>↗</span></button></div>
-  <dialog id="compareDialog" class="compare-dialog"><div class="dialog-head"><div><span class="section-kicker">SIDE BY SIDE</span><h2>模型横向对比</h2></div><button type="button" class="dialog-close" id="closeCompare" aria-label="关闭对比">×</button></div><div id="compareResults"></div><p class="dialog-note">数据口径不同：GPT 分数与任务成本为未核验示例；Opus 仅型号、推理档位、规格及标准 API 费率经官方文档核对。空缺项不作优劣判断，token 单价不能替代每任务成本。</p></dialog>
+  <dialog id="compareDialog" class="compare-dialog"><div class="dialog-head"><div><span class="section-kicker">SIDE BY SIDE</span><h2>模型横向对比</h2></div><button type="button" class="dialog-close" id="closeCompare" aria-label="关闭对比">×</button></div><div id="compareResults"></div><p class="dialog-note">Opus 5.5：Artificial Analysis Intelligence Index v4.3.2，2026-10-09，Default Fallback。GPT 为未核验示例；Opus 5 本轮未摘录。API token 单价与测评任务成本分开显示。</p></dialog>
   <script>window.MODEL_ATLAS_INLINE_DATA={
   "source_mode": "user_supplied_demo",
   "is_demo": true,
@@ -600,6 +611,7 @@
 'use strict';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const meta=window.MODEL_ATLAS_OPUS_DATA, selected=new Set();
+const benchmark={"model_id":"claude-opus-5-5","source":"Artificial Analysis","source_url":"https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-sol-vs-claude-opus-5-5","index_name":"Artificial Analysis Intelligence Index","index_version":"4.3.2","cost_metric":"Cost per Intelligence Index task","configuration":"Default Fallback","captured_on":"2026-10-09","update_mode":"manual_public_citation","citation_guidelines":"https://artificialanalysis.ai/brand-kit/","measurements":{"max":{"score":58,"cost_usd":5.98},"xhigh":{"score":56,"cost_usd":3.46},"high":{"score":54,"cost_usd":1.82},"medium":{"score":51,"cost_usd":1.34},"low":{"score":42,"cost_usd":0.55}}};
 let data={models:[]}, family='all', sort='score', search='';
 const finite=n=>typeof n==='number'&&Number.isFinite(n);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -634,14 +646,14 @@ function overview(){
  $('#modelCount').innerHTML=num(data.models.length)+' <small>个</small>';
  $('#topScore').innerHTML=num(scored[0]?.score)+' <small>pts</small>';$('#topModel').textContent=scored[0]?.name||'暂无数据';
  $('#minCost').innerHTML=money(costs[0]?.cost_usd)+' <small>USD</small>';$('#minCostModel').textContent=costs[0]?.name||'暂无数据';
- $('#lastCheck').textContent=meta.verified_on;$('#versionLabel').textContent='仅 Opus 规格 / 费率 · 非测评分数更新';
+ $('#lastCheck').textContent=benchmark.captured_on;$('#versionLabel').textContent='AA v'+benchmark.index_version+' / Default Fallback · 非实时';
  $('#statusBanner').className='status-banner status-demo';
- $('#statusBanner').innerHTML='<div class="status-left"><span class="status-icon">ⓘ</span><span><strong>GPT：35 条未核验示例　/　Opus：官方规格与费率已核对</strong><br>Opus 同口径评分与每任务成本未接入，不参与数值排名；本站未启用实时测评更新。</span></div><span class="status-right">Opus 规格核对 · '+esc(meta.verified_on)+'</span>';
- $('#footerFreshness').textContent='OPUS SPECS · '+meta.verified_on+' / NOT LIVE';
+ $('#statusBanner').innerHTML='<div class="status-left"><span class="status-icon">ⓘ</span><span><strong>Opus 5.5：5 档分数与任务成本已补齐　/　GPT：35 条未核验示例</strong><br>Opus 5.5 来源：Artificial Analysis Intelligence Index v4.3.2 · Default Fallback；Opus 5 本轮未摘录。混合参考展示，不是全站官方排名。</span></div><span class="status-right">测评快照 · '+esc(benchmark.captured_on)+'</span>';
+ $('#footerFreshness').textContent='OPUS 5.5 BENCHMARK · '+benchmark.captured_on+' / NOT LIVE';
  const max=Math.max(1,...scored.map(m=>m.score));
- $('#heroBars').innerHTML=scored.slice(0,5).map(m=>`<div class="barline"><span class="bar-label" title="${esc(m.name)}">${esc(m.name)}</span><div class="bar-track"><div class="bar-fill ${{astra:'purple',sol:'orange',terra:'green',luna:'blue'}[mode(m)]}" style="width:${m.score/max*100}%"></div></div><span class="bar-number">${num(m.score)}</span></div>`).join('');
- $('#picks').innerHTML=picks().filter(p=>p.model).map(p=>{const m=p.model,c=mode(m);return `<article class="pick ${c}"><div class="pick-symbol" aria-hidden="true">${icons[c]}</div><div class="pick-tag">${p.tag}</div><h3 title="${esc(m.name)}">${esc(m.name)}</h3><p>${p.title} · ${p.sub}</p><span class="pick-letter" aria-hidden="true">${c[0].toUpperCase()}</span></article>`;}).join('');
- $('#opusModels').innerHTML=meta.models.map(m=>`<article class="opus-model-card"><div class="opus-card-head"><span class="model-icon" aria-hidden="true">${icons.opus}</span><div><h3>${esc(m.name)}</h3><span class="opus-version-badge">${esc(m.status)} · Anthropic</span></div></div><div class="opus-price-grid"><div><small>输入 / 百万 token</small><strong>$${num(m.input_mtok_usd)}</strong></div><div><small>输出 / 百万 token</small><strong>$${num(m.output_mtok_usd)}</strong></div><div><small>上下文窗口</small><strong>1M <span>tokens</span></strong></div></div><p class="opus-meta">Low / Medium / High / Xhigh / Max · 默认 ${esc(m.default_effort)}<br>最大常规输出 128K tokens · 标准 API 单价，不含缓存、批量、Fast 模式与区域加价。</p><div class="opus-actions"><button class="opus-compare-btn" type="button" data-opus-compare="${esc(m.api_id+':'+m.default_effort)}">与 GPT 对比 ↗</button><a class="opus-source" href="${esc(m.source_url)}" target="_blank" rel="noopener noreferrer">官方规格 ↗</a></div></article>`).join('');
+ $('#heroBars').innerHTML=scored.slice(0,5).map(m=>`<div class="barline"><span class="bar-label" title="${esc(m.name+(m.benchmark_source?' / Default Fallback / v4.3.2 / 2026-10-09':' / 未核验示例'))}">${esc(m.name)}</span><div class="bar-track"><div class="bar-fill ${{astra:'purple',sol:'orange',terra:'green',luna:'blue',opus:'opus'}[mode(m)]}" style="width:${m.score/max*100}%"></div></div><span class="bar-number">${num(m.score)}</span></div>`).join('');
+ $('#picks').innerHTML=picks().filter(p=>p.model).map(p=>{const m=p.model,c=mode(m);return `<article class="pick ${c}"><div class="pick-symbol" aria-hidden="true">${icons[c]}</div><div class="pick-tag">${p.tag}</div><h3 title="${esc(m.name)}">${esc(m.name)}</h3><p>${p.title} · ${p.sub}</p>${m.benchmark_source?`<small class="pick-citation">AA v${esc(m.benchmark_version)} · Default Fallback<br>${esc(m.benchmark_date)}</small>`:''}<span class="pick-letter" aria-hidden="true">${c[0].toUpperCase()}</span></article>`;}).join('');
+ $('#opusModels').innerHTML=meta.models.map(m=>`<article class="opus-model-card"><div class="opus-card-head"><span class="model-icon" aria-hidden="true">${icons.opus}</span><div><h3>${esc(m.name)}</h3><span class="opus-version-badge">${esc(m.status)} · Anthropic</span></div></div><div class="opus-price-grid"><div><small>输入 / 百万 token</small><strong>$${num(m.input_mtok_usd)}</strong></div><div><small>输出 / 百万 token</small><strong>$${num(m.output_mtok_usd)}</strong></div><div><small>上下文窗口</small><strong>1M <span>tokens</span></strong></div></div><p class="opus-meta">${m.api_id===benchmark.model_id?'测评：五档分数与任务成本已补齐（Default Fallback）':'本轮未摘录测评数值；保留规格对比'}<br>Low / Medium / High / Xhigh / Max · 默认 ${esc(m.default_effort)}<br>最大常规输出 128K tokens · 标准 API 单价，不含缓存、批量、Fast 模式与区域加价。</p><div class="opus-actions"><button class="opus-compare-btn" type="button" data-opus-compare="${esc(m.api_id+':'+m.default_effort)}">与 GPT 对比 ↗</button><a class="opus-source" href="${esc(m.source_url)}" target="_blank" rel="noopener noreferrer">官方规格 ↗</a></div></article>`).join('');
 }
 function render(){
  const rows=sorted(data.models.filter(m=>(family==='all'||m.family===family)&&(m.name+' '+(effortLabels[m.effort]||'')).toLowerCase().includes(search)),sort);
@@ -649,37 +661,37 @@ function render(){
  let rank=0,separator=false;
  $('#rankingRows').innerHTML=rows.length?rows.map(m=>{
   const op=m.mode==='opus',c=mode(m),ranked=finite(metric(m,sort));let before='';
-  if(!ranked&&!separator){separator=true;before='<tr class="benchmark-divider"><td colspan="7">Claude Opus · 官方规格 / 费率已核对 · 同口径评分与每任务成本未接入，以下不排名</td></tr>';}
+  if(!ranked&&!separator){separator=true;before='<tr class="benchmark-divider"><td colspan="7">以下项目本轮未摘录测评数值（Opus 5），不排名；不代表来源网站没有数据</td></tr>';}
   if(ranked)rank++;
-  const badge=op?'规格已核对'+(m.effort===m.default_effort?' · 默认档':''):(picks().find(p=>p.model?.id===m.id)?.title||'');
-  return before+`<tr class="family-${c}" data-model-id="${esc(m.id)}"><td>${ranked?`<span class="rank-number ${rank<=3?'top3':''}">${rank}</span>`:'<span class="unranked">未排</span>'}</td><td><div class="model-cell"><span class="model-icon" aria-hidden="true">${icons[c]}</span><div><div class="model-name">${esc(m.name)}</div>${badge?`<span class="model-badge">${esc(badge)}</span>`:''}${op?`<div class="model-api-note"><a href="${esc(m.source_url)}" target="_blank" rel="noopener noreferrer">API 输入 $${num(m.input_mtok_usd)} / 输出 $${num(m.output_mtok_usd)} · 每百万 token ↗</a></div>`:''}</div></div></td><td>${finite(m.score)?`<span class="score-val">${num(m.score)}</span>`:'<span class="missing-val">待接入</span>'}</td><td>${finite(m.cost_usd)?`<span class="usd-cell">${money(m.cost_usd)}</span>`:'<span class="missing-val">—</span><small class="cell-note">不是 token 单价</small>'}</td><td>${finite(m.relative_cost)?`<span class="relative-cell">≈ ${num(m.relative_cost)}</span>`:'<span class="missing-val">—</span>'}</td><td class="best-cell">${esc(best(m))}</td><td><input type="checkbox" class="compare-checkbox" aria-label="选择 ${esc(m.name)} 用于对比" data-id="${esc(m.id)}" ${selected.has(m.id)?'checked':''}></td></tr>`;
+  const badge=op?(m.benchmark_source?'AA 页面摘录':'仅规格已核对')+(m.effort===m.default_effort?' · 默认档':''):(picks().find(p=>p.model?.id===m.id)?.title||'');
+  return before+`<tr class="family-${c}" data-model-id="${esc(m.id)}"><td>${ranked?`<span class="rank-number ${rank<=3?'top3':''}">${rank}</span>`:'<span class="unranked">未排</span>'}</td><td><div class="model-cell"><span class="model-icon" aria-hidden="true">${icons[c]}</span><div><div class="model-name">${esc(m.name)}</div>${badge?`<span class="model-badge">${esc(badge)}</span>`:''}${m.benchmark_source?`<div class="model-api-note"><a href="${esc(m.benchmark_source)}" target="_blank" rel="noopener noreferrer">AA v${esc(m.benchmark_version)} · ${esc(m.benchmark_configuration)}<br>${esc(m.benchmark_date)} · 测评来源 ↗</a></div>`:''}${op?`<div class="model-api-note"><a href="${esc(m.source_url)}" target="_blank" rel="noopener noreferrer">API 输入 $${num(m.input_mtok_usd)} / 输出 $${num(m.output_mtok_usd)} · 每百万 token ↗</a></div>`:''}</div></div></td><td>${finite(m.score)?`<span class="score-val">${num(m.score)}</span>`:'<span class="missing-val">本轮未摘录</span>'}</td><td>${finite(m.cost_usd)?`<span class="usd-cell">${money(m.cost_usd)}</span>`:'<span class="missing-val">—</span><small class="cell-note">不是 token 单价</small>'}</td><td>${finite(m.relative_cost)?`<span class="relative-cell">≈ ${num(m.relative_cost)}</span>`:'<span class="missing-val">—</span>'}</td><td class="best-cell">${esc(best(m))}</td><td><input type="checkbox" class="compare-checkbox" aria-label="选择 ${esc(m.name)} 用于对比" data-id="${esc(m.id)}" ${selected.has(m.id)?'checked':''}></td></tr>`;
  }).join(''):'<tr><td colspan="7" class="empty-row">没有找到匹配的模式，可以换个关键词或版本。</td></tr>';
 }
 function dock(){$('#compareNum').textContent=selected.size;$('#compareDock').hidden=!selected.size;}
 function compare(){
  const rows=[...selected].map(id=>data.models.find(m=>m.id===id)).filter(Boolean);if(!rows.length)return;
  const mixed=rows.some(m=>m.mode==='opus'), field=(label,value,cls='')=>`<div class="comparison-field"><small>${label}</small><b class="${cls}">${value}</b></div>`;
- $('#compareResults').innerHTML=(mixed?'<p class="comparison-caveat">Opus 的规格与 API 费率已核对；GPT 数值仍为演示。未接入的测评项留空，不能据此认定谁更强或更便宜。</p>':'')+`<div class="compare-cards" style="--compare-cols:${rows.length}">`+rows.map(m=>{
+ $('#compareResults').innerHTML=(mixed?'<p class="comparison-caveat">Opus 5.5 的分数和任务成本为 Artificial Analysis Intelligence Index v4.3.2 / Default Fallback（2026-10-09）快照；GPT 仍为未核验示例。本轮未摘录项目留空，不能据此作可靠的跨厂商优劣结论。</p>':'')+`<div class="compare-cards" style="--compare-cols:${rows.length}">`+rows.map(m=>{
   const op=m.mode==='opus';
-  return `<article class="compare-card family-${mode(m)}"><div class="compare-card-top"><span class="model-icon" aria-hidden="true">${icons[mode(m)]}</span><strong>${esc(m.name)}</strong></div><p class="source-detail">${op?'Anthropic 官方规格 · '+esc(meta.verified_on):'原始参考示例 · 名称 / 数值未核验'}<br>${esc(best(m))}</p>`+
-  field('智能指数 ↑',finite(m.score)?num(m.score):'待接入同口径评测',finite(m.score)?'':'spec-text')+
-  field('每任务成本 · USD',finite(m.cost_usd)?money(m.cost_usd):'未接入',finite(m.cost_usd)?'':'spec-text')+
+  return `<article class="compare-card family-${mode(m)}"><div class="compare-card-top"><span class="model-icon" aria-hidden="true">${icons[mode(m)]}</span><strong>${esc(m.name)}</strong></div><p class="source-detail">${m.benchmark_source?'Artificial Analysis 测评 · '+esc(m.benchmark_date):op?'Anthropic 规格 · 测评本轮未摘录':'原始参考示例 · 名称 / 数值未核验'}<br>${esc(best(m))}</p>`+
+  field(m.benchmark_source?'Intelligence Index v'+esc(m.benchmark_version)+' ↑':'智能指数 ↑',finite(m.score)?num(m.score):'本轮未摘录',finite(m.score)?'':'spec-text')+
+  field('每任务成本 · USD',finite(m.cost_usd)?money(m.cost_usd):'本轮未摘录',finite(m.cost_usd)?'':'spec-text')+
   field('相对消耗 · 每 $0.01 为 1',finite(m.relative_cost)?'≈ '+num(m.relative_cost):'—',finite(m.relative_cost)?'':'spec-text')+
-  (mixed?field('标准 API 输入 / 百万 token',op?money(m.input_mtok_usd):'未核验，暂不提供',op?'price-value':'spec-text')+
+  (mixed?field('测评配置 / 基准版本',m.benchmark_source?esc(m.benchmark_configuration)+' / v'+esc(m.benchmark_version)+' / '+esc(m.benchmark_date):op?'本轮未摘录':'未核验示例','spec-text')+field('标准 API 输入 / 百万 token',op?money(m.input_mtok_usd):'未核验，暂不提供',op?'price-value':'spec-text')+
   field('标准 API 输出 / 百万 token',op?money(m.output_mtok_usd):'未核验，暂不提供',op?'price-value':'spec-text')+
   field('上下文 / 最大常规输出',op?'1M / 128K tokens':'未核验，暂不提供','spec-text')+
   field('推理档位',op?esc(m.effort)+'（默认 '+esc(m.default_effort)+'）':esc(effort(m))+' · 参考名称','spec-text')+
   field('计费与设置说明',op?'标准 API；不含缓存、批量、Fast 与区域加价。effort 控制 token 消耗，不改变本表单价。':'仅演示任务成本，不能作为 API 预算。','spec-text'):'')+
-  (op?`<a class="comparison-source" href="${esc(m.source_url)}" target="_blank" rel="noopener noreferrer">官方规格 ↗</a> · <a class="comparison-source" href="${esc(meta.effort_source)}" target="_blank" rel="noopener noreferrer">档位说明 ↗</a>`:'')+'</article>';
+  (m.benchmark_source?`<a class="comparison-source" href="${esc(m.benchmark_source)}" target="_blank" rel="noopener noreferrer">Source: Artificial Analysis ↗</a><br>`:'')+(op?`<a class="comparison-source" href="${esc(m.source_url)}" target="_blank" rel="noopener noreferrer">官方规格 ↗</a> · <a class="comparison-source" href="${esc(meta.effort_source)}" target="_blank" rel="noopener noreferrer">档位说明 ↗</a>`:'')+'</article>';
  }).join('')+'</div>';
  $('#compareDialog').showModal();
 }
 function exportCsv(){
  let rank=0;
- const rows=[['参考排名','模型','模型家族','参考智能指数','参考单任务成本USD','参考相对消耗','适用任务（编辑建议）','数据状态','API输入USD/百万token','API输出USD/百万token','上下文tokens','最大常规输出tokens','effort','规格核对日期','规格来源','档位来源','价格口径'],...sorted(data.models).map(m=>[finite(m.score)?++rank:'',m.name,m.family,m.score,m.cost_usd,m.relative_cost,best(m),m.mode==='opus'?'仅官方规格/费率已核对；测评未接入':'GPT原始示例；名称/数值未核验',m.input_mtok_usd,m.output_mtok_usd,m.context_tokens,m.max_output_tokens,m.effort,m.mode==='opus'?meta.verified_on:'',m.source_url,m.mode==='opus'?meta.effort_source:'',m.mode==='opus'?meta.price_basis:'未核验参考任务成本'])];
+ const rows=[['参考排名','模型','模型家族','参考智能指数','参考单任务成本USD','参考相对消耗','适用任务（编辑建议）','数据状态','API输入USD/百万token','API输出USD/百万token','上下文tokens','最大常规输出tokens','effort','规格核对日期','规格来源','档位来源','价格口径','测评来源','基准版本','测评配置','测评摘录日期'],...sorted(data.models).map(m=>[finite(m.score)?++rank:'',m.name,m.family,m.score,m.cost_usd,m.relative_cost,best(m),m.benchmark_source?'Artificial Analysis 公开结果的日期快照':m.mode==='opus'?'官方规格；测评本轮未摘录':'GPT原始示例；名称/数值未核验',m.input_mtok_usd,m.output_mtok_usd,m.context_tokens,m.max_output_tokens,m.effort,m.mode==='opus'?meta.verified_on:'',m.source_url,m.mode==='opus'?meta.effort_source:'',m.mode==='opus'?meta.price_basis:'未核验参考任务成本',m.benchmark_source,m.benchmark_version,m.benchmark_configuration,m.benchmark_date])];
  const cell=v=>{let t=String(v??'');if(/^[=+@\t\r]/.test(t)||(/^[-]/.test(t)&&typeof v!=='number'))t="'"+t;return '"'+t.replaceAll('"','""')+'"';};
  const text='\ufeff'+rows.map(row=>row.map(cell).join(',')).join('\r\n');
- const url=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='MODEL-ATLAS-GPT-REFERENCE-OPUS-SPECS.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ const url=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='MODEL-ATLAS-OPUS55-SNAPSHOT-2026-10-09.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 $$('.filter-tab').forEach(b=>b.addEventListener('click',()=>{family=b.dataset.family;$$('.filter-tab').forEach(t=>{t.classList.toggle('active',t===b);t.setAttribute('aria-pressed',String(t===b));});render();}));
 $('#search').addEventListener('input',e=>{search=e.target.value.trim().toLowerCase();render();});
@@ -692,6 +704,10 @@ $('#compareDialog').addEventListener('click',e=>{const d=$('#compareDialog'),r=d
 try{
  const snap=window.MODEL_ATLAS_INLINE_DATA;if(!Array.isArray(snap?.models)||!snap.models.length)throw new Error('没有有效参考记录');
  const extra=meta.models.flatMap(m=>['max','xhigh','high','medium','low'].map(e=>({...m,id:m.api_id+':'+e,name:m.name+' ('+effortLabels[e]+')',family:'opus',mode:'opus',effort:e,score:null,cost_usd:null,relative_cost:null,score_delta:null})));
+ for(const m of extra){
+  const b=m.api_id===benchmark.model_id?benchmark.measurements[m.effort]:null;
+  if(b){m.score=b.score;m.cost_usd=b.cost_usd;m.relative_cost=Math.round(b.cost_usd*10000)/100;m.benchmark_source=benchmark.source_url;m.benchmark_version=benchmark.index_version;m.benchmark_configuration=benchmark.configuration;m.benchmark_date=benchmark.captured_on;}
+ }
  data={...snap,models:[...snap.models,...extra]};overview();render();
 }catch(e){$('#statusBanner').className='status-banner status-error';$('#statusBanner').textContent='页面数据读取失败：'+e.message;$('#rankingRows').innerHTML='<tr><td colspan="7" class="empty-row">无法加载数据</td></tr>';}
 })();
