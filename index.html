@@ -109,6 +109,24 @@
 .opus-disclosure a,.board-footer a{text-decoration:underline}
 
 </style>
+
+<style id="uniform-ranking-row-layout">
+/* Layout-only fix. All model records, scores, costs and source notes stay unchanged. */
+.ranking-table tbody > tr[data-model-id]{height:64px}
+.ranking-table tbody > tr[data-model-id] > td{height:64px;padding:8px 13px;vertical-align:middle}
+.ranking-table tbody > tr[data-model-id] .model-cell{min-width:0;align-items:center}
+.ranking-table tbody > tr[data-model-id] .model-cell > div{min-width:0;max-height:44px;overflow:hidden}
+.ranking-table tbody > tr[data-model-id] .model-name{display:block;line-height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ranking-table tbody > tr[data-model-id] .model-badge{max-width:100%;line-height:14px;margin-top:2px;padding:2px 5px;vertical-align:top;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Extended provenance and API rates remain accessible in the comparison dialog and Opus cards. */
+.ranking-table tbody > tr[data-model-id] .model-api-note{display:none}
+.ranking-table tbody > tr[data-model-id] > .best-cell{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ranking-table tbody > tr[data-model-id] .compare-checkbox{display:block;margin:0 auto}
+@media print{
+  .ranking-table tbody > tr[data-model-id],.ranking-table tbody > tr[data-model-id] > td{height:52px}
+  .ranking-table tbody > tr[data-model-id] > td{padding:5px}
+}
+</style>
 </head>
 <body>
   <div class="topline"></div>
