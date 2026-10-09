@@ -1,0 +1,43 @@
+name: Verify published Opus comparison
+on:
+  push:
+    branches: [feature/opus-comparison]
+    paths: [.github/workflows/verify-opus-live.yml]
+permissions:
+  contents: read
+jobs:
+  verify-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Verify live homepage byte-for-byte
+        run: |
+          python - <<'PY'
+          import hashlib, json, time
+          from urllib.request import Request, urlopen
+          expected = '0165c6d3f08d8f68197ba420f25d9e6b4e244c2884f0b56e41e025141c76c7be'
+          url = 'https://rlchen4.github.io/model-atlas/'
+          last = None
+          for attempt in range(12):
+              try:
+                  request = Request(url + '?verify=opus-1cf2c03-' + str(attempt), headers={'Cache-Control': 'no-cache', 'User-Agent': 'MODEL-ATLAS-release-check/1.0'})
+                  with urlopen(request, timeout=12) as response:
+                      body = response.read()
+                      digest = hashlib.sha256(body).hexdigest()
+                      last = {'url':url, 'http_status':response.status, 'bytes':len(body), 'sha256':digest, 'matches_tested':digest == expected}
+                  print(json.dumps(last), flush=True)
+                  if digest == expected:
+                      text = body.decode('utf-8')
+                      assert 'claude-opus-5-5' in text and 'claude-opus-5' in text
+                      assert 'score:null,cost_usd:null,relative_cost:null' in text
+                      assert 'icon-glyph' in text and 'compareDialog' in text
+                      print('PASS: live Opus comparison equals the locally tested homepage; original visual design retained.')
+                      break
+              except Exception as error:
+                  last = str(error)
+                  print('Attempt', attempt + 1, last, flush=True)
+              if attempt < 11:
+                  time.sleep(6)
+          else:
+              raise SystemExit('Live verification failed: ' + str(last))
+          PY
