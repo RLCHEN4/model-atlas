@@ -853,7 +853,7 @@ try{
   const b=m.api_id===benchmark.model_id?benchmark.measurements[m.effort]:null;
   if(b){m.score=b.score;m.cost_usd=b.cost_usd;m.relative_cost=Math.round(b.cost_usd*10000)/100;m.benchmark_source=benchmark.source_url;m.benchmark_version=benchmark.index_version;m.benchmark_configuration=benchmark.configuration;m.benchmark_date=benchmark.captured_on;}
  }
- data={...snap,models:[...snap.models,...extra]};overview();render();
+ data={...snap,models:[...snap.models,...extra]};const startFamily=family;family='all';overview();family=startFamily;overview();render();
 }catch(e){$('#statusBanner').className='status-banner status-error';$('#statusBanner').textContent='页面数据读取失败：'+e.message;$('#rankingRows').innerHTML='<tr><td colspan="7" class="empty-row">无法加载数据</td></tr>';}
 })();
 </script>
