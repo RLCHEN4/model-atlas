@@ -111,6 +111,17 @@
 </style>
 
 <style id="uniform-ranking-row-layout">
+/* Latest-source data reuses the approved cards and 64px rows. */
+.pick.other{background:linear-gradient(128deg,#f2f6fd,#e9f0fb);border-color:#dde7f8}
+.pick.other .pick-symbol,.family-other .model-icon{background:#5874ad}
+.pick.other .pick-tag,.pick.other h3{color:#38629a}
+.pick.other p{color:#6681a3}
+.ranking-table tbody tr.family-other{background:#f5f8fe}
+.family-other .score-val,.family-other .relative-cell{color:#3b70ba}
+.family-opus .model-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.filter-tab[data-family="latest"].active{color:#1f68ca}
+@media(max-width:540px){.tab-group{justify-content:flex-start;gap:2px}}
+
 /* Layout-only fix. All model records, scores, costs and source notes stay unchanged. */
 .ranking-table tbody > tr[data-model-id]{height:64px}
 .ranking-table tbody > tr[data-model-id] > td{height:64px;padding:8px 13px;vertical-align:middle}
@@ -144,7 +155,7 @@
         <div class="hero-actions"><a href="#leaderboard" class="main-cta">查看完整榜单 <span aria-hidden="true">↘</span></a><button type="button" class="ghost-cta" id="downloadCsv">导出对比 CSV <span aria-hidden="true">↓</span></button></div>
       </div>
       <div class="hero-chart" aria-label="前五名模型智能指数条形图">
-        <div class="chart-header"><div><span class="overline">REFERENCE COMPARISON</span><h2>智能指数 <span class="sparkline">↗</span></h2></div><span class="chart-pill">TOP 5</span></div>
+        <div class="chart-header"><div><span class="overline" id="heroSourceLabel">REFERENCE COMPARISON</span><h2><span id="chartHeading">智能指数</span> <span class="sparkline">↗</span></h2></div><span class="chart-pill">TOP 5</span></div>
         <div id="heroBars" class="chart-bars"><div class="bar-skeleton"></div><div class="bar-skeleton"></div><div class="bar-skeleton"></div><div class="bar-skeleton"></div><div class="bar-skeleton"></div></div>
         <div class="chart-footer benchmark-attribution"><span>本站收录项的参考 TOP 5 · 非全站官方排名</span><span>Opus: <a href="https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-sol-vs-claude-opus-5-5" target="_blank" rel="noopener noreferrer">Artificial Analysis Intelligence Index v4.3.2 ↗</a><br>2026-10-09 · Default Fallback · GPT：未核验示例</span></div>
       </div>
@@ -153,10 +164,10 @@
     <div class="status-banner" id="statusBanner" role="status"><div class="status-left"><span class="status-icon">◷</span> 正在读取榜单数据…</div></div>
 
     <section class="metrics" aria-label="榜单概览">
-      <article class="metric"><span class="metric-label">已收录模式 <span>01 / COVERAGE</span></span><div class="metric-value" id="modelCount">— <small>个</small></div><p>35 个 GPT 参考 + 10 个 Opus 档位</p></article>
-      <article class="metric"><span class="metric-label">参考最高智能指数 <span>02 / PEAK</span></span><div class="metric-value" id="topScore">— <small>pts</small></div><p id="topModel">等待数据</p></article>
-      <article class="metric"><span class="metric-label">示例最低任务成本 <span>03 / EFFICIENCY</span></span><div class="metric-value" id="minCost">— <small>USD</small></div><p id="minCostModel">等待数据</p></article>
-      <article class="metric"><span class="metric-label">Opus 测评摘录 <span>04 / UPDATE</span></span><div class="metric-value small-time" id="lastCheck">—</div><p id="versionLabel">数据版本待获取</p></article>
+      <article class="metric"><span class="metric-label">已收录模式 <span>01 / COVERAGE</span></span><div class="metric-value" id="modelCount">— <small>个</small></div><p id="coverageNote">35 个 GPT 参考 + 10 个 Opus 档位</p></article>
+      <article class="metric"><span class="metric-label"><span id="peakLabel">参考最高智能指数</span> <span>02 / PEAK</span></span><div class="metric-value" id="topScore">— <small>pts</small></div><p id="topModel">等待数据</p></article>
+      <article class="metric"><span class="metric-label"><span id="lowCostLabel">示例最低任务成本</span> <span>03 / EFFICIENCY</span></span><div class="metric-value" id="minCost">— <small>USD</small></div><p id="minCostModel">等待数据</p></article>
+      <article class="metric"><span class="metric-label"><span id="updateLabel">Opus 测评摘录</span> <span>04 / UPDATE</span></span><div class="metric-value small-time" id="lastCheck">—</div><p id="versionLabel">数据版本待获取</p></article>
     </section>
 
     <section class="recommendation" aria-labelledby="rec-title">
@@ -170,11 +181,12 @@
 <p class="opus-disclosure">Opus 5.5 五档分数与每任务成本摘录自 <a href="https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-sol-vs-claude-opus-5-5" target="_blank" rel="noopener noreferrer">Artificial Analysis ↗</a>，Intelligence Index v4.3.2，2026-10-09，全部为 Default Fallback。任务成本不是 token 单价；相对消耗 = 每任务美元成本 ÷ 0.01。Opus 5 本轮未摘录，仍不排名。</p>
 </section>
     <section id="leaderboard" class="board-section" aria-labelledby="board-title">
-      <div class="section-top board-top"><div><span class="section-kicker">THE FULL RANKING / 完整榜单</span><h2 id="board-title">模型能力排行榜 <span class="board-count" id="filteredCount">—</span></h2></div><button type="button" class="print-btn" id="printPage">打印 / 保存 PDF <span aria-hidden="true">↗</span></button></div>
+      <div class="section-top board-top"><div><span class="section-kicker">THE FULL RANKING / 完整榜单</span><h2 id="board-title"><span id="boardHeading">模型能力排行榜</span> <span class="board-count" id="filteredCount">—</span></h2></div><button type="button" class="print-btn" id="printPage">打印 / 保存 PDF <span aria-hidden="true">↗</span></button></div>
       <div class="board-panel">
         <div class="filters">
           <div class="tab-group" role="group" aria-label="按模型系列筛选">
-            <button type="button" class="filter-tab active" data-family="all" aria-pressed="true">全部</button>
+            <button type="button" class="filter-tab active" data-family="latest" aria-pressed="true">现役榜 · 10/13</button>
+            <button type="button" class="filter-tab" data-family="all" aria-pressed="false">全部</button>
             <button type="button" class="filter-tab" data-family="6.1" aria-pressed="false">GPT-6.1</button>
             <button type="button" class="filter-tab" data-family="6" aria-pressed="false">GPT-6</button>
             <button type="button" class="filter-tab" data-family="5.6" aria-pressed="false">GPT-5.6</button>
@@ -186,7 +198,7 @@
           </div>
         </div>
         <div class="table-scroll-hint" aria-hidden="true"><span>左右滑动表格，查看成本、任务与对比</span><span>↔</span></div>
-        <div class="table-scroller" tabindex="0" role="region" aria-label="完整排行榜，可左右滚动查看所有列"><table class="ranking-table"><thead><tr><th scope="col" class="col-rank">名次</th><th scope="col" class="col-model">模型 / 推理模式</th><th scope="col" class="col-index">智能指数 <small>↑ 更高更好</small></th><th scope="col" class="col-usd">任务成本 <small>USD / task</small></th><th scope="col" class="col-relative">相对消耗 <small>以 $0.01 为 1</small></th><th scope="col" class="col-best">最适合做什么</th><th scope="col" class="col-compare">对比</th></tr></thead><tbody id="rankingRows"><tr><td colspan="7" class="empty-row">正在读取数据…</td></tr></tbody></table></div>
+        <div class="table-scroller" tabindex="0" role="region" aria-label="完整排行榜，可左右滚动查看所有列"><table class="ranking-table"><thead><tr><th scope="col" class="col-rank">名次</th><th scope="col" class="col-model">模型 / 推理模式</th><th scope="col" class="col-index"><span id="indexColHeading">智能指数</span> <small id="indexColHint">↑ 更高更好</small></th><th scope="col" class="col-usd"><span id="costColHeading">任务成本</span> <small id="costColHint">USD / task</small></th><th scope="col" class="col-relative">相对消耗 <small>以 $0.01 为 1</small></th><th scope="col" class="col-best">最适合做什么</th><th scope="col" class="col-compare">对比</th></tr></thead><tbody id="rankingRows"><tr><td colspan="7" class="empty-row">正在读取数据…</td></tr></tbody></table></div>
         <div class="board-footer"><span>Opus 5.5: <a href="https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-sol-vs-claude-opus-5-5" target="_blank" rel="noopener noreferrer">Source: Artificial Analysis ↗</a> · Intelligence Index v4.3.2 · 2026-10-09 · Default Fallback<br>GPT 为未核验示例；此混合参考表不是 AA 官方排名。</span><span id="tableFoot">按智能指数降序</span></div>
       </div>
     </section>
@@ -630,7 +642,8 @@
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const meta=window.MODEL_ATLAS_OPUS_DATA, selected=new Set();
 const benchmark={"model_id":"claude-opus-5-5","source":"Artificial Analysis","source_url":"https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-sol-vs-claude-opus-5-5","index_name":"Artificial Analysis Intelligence Index","index_version":"4.3.2","cost_metric":"Cost per Intelligence Index task","configuration":"Default Fallback","captured_on":"2026-10-09","update_mode":"manual_public_citation","citation_guidelines":"https://artificialanalysis.ai/brand-kit/","measurements":{"max":{"score":58,"cost_usd":5.98},"xhigh":{"score":56,"cost_usd":3.46},"high":{"score":54,"cost_usd":1.82},"medium":{"score":51,"cost_usd":1.34},"low":{"score":42,"cost_usd":0.55}}};
-let data={models:[]}, family='all', sort='score', search='';
+const livebenchSnapshot={"source":"LiveBench 2.0","url":"https://livebench.ai/","released":"2026-10-13","checked":"2026-10-14","license":"https://github.com/LiveBench/LiveBench/blob/main/LICENSE","models":[{"name":"Claude Fable 5.1","provider":"Anthropic","score":88,"cost":4.526,"task":"复杂开发、代理工作流","open":false},{"name":"Claude Opus 5.5","provider":"Anthropic","score":86.5,"cost":4.216,"task":"研究复核、专业写作","open":false},{"name":"GPT-6 Astra","provider":"OpenAI","score":86.1,"cost":3.442,"task":"系统设计、复杂工程","open":false},{"name":"GPT-6.1 Sol","provider":"OpenAI","score":85.4,"cost":0.734,"task":"代码开发、性价比交付","open":false},{"name":"Gemini 4 Argon","provider":"Google","score":84.1,"cost":1.83,"task":"多步骤推理、综合分析","open":false},{"name":"Claude Fable 5","provider":"Anthropic","score":83.6,"cost":5.505,"task":"深度编码、复杂任务","open":false},{"name":"Claude Sonnet 5.5","provider":"Anthropic","score":82.5,"cost":3.805,"task":"开发、内容与研究","open":false},{"name":"Claude Opus 5","provider":"Anthropic","score":82.1,"cost":3.907,"task":"研究、审查与写作","open":false},{"name":"GPT-6 Sol","provider":"OpenAI","score":81.9,"cost":1.099,"task":"专业开发、方案梳理","open":false},{"name":"Muse Wonder 1.0","provider":"Meta","score":78.1,"cost":1.807,"task":"内容理解、通用推理","open":false},{"name":"DeepSeek V4.1 Flash","provider":"DeepSeek","score":77.3,"cost":0.134,"task":"快速开发、低成本处理","open":true},{"name":"Claude Opus 4.8","provider":"Anthropic","score":76.8,"cost":4.405,"task":"成熟复杂工作流","open":false},{"name":"GPT-5.6 Sol","provider":"OpenAI","score":76.3,"cost":2.494,"task":"代码维护、文档分析","open":false},{"name":"GPT-5.6 Terra","provider":"OpenAI","score":75,"cost":1.691,"task":"多文件整理、信息分析","open":false},{"name":"Muse Spark 1.3","provider":"Meta","score":74.9,"cost":0.974,"task":"日常创意、批量任务","open":false},{"name":"Grok 4.6","provider":"xAI","score":74.6,"cost":1.245,"task":"日常分析、工具调用","open":false},{"name":"Claude Sonnet 5","provider":"Anthropic","score":74.6,"cost":3.364,"task":"常规开发、长文内容","open":false},{"name":"Claude Haiku 5.5","provider":"Anthropic","score":74.5,"cost":0.211,"task":"短任务、快速分类","open":false},{"name":"Grok 4.7","provider":"xAI","score":74.1,"cost":2.702,"task":"业务分析、问答","open":false},{"name":"GLM-5.3 Flash","provider":"Z.ai","score":70.6,"cost":0.149,"task":"快速回答、轻量代理","open":true},{"name":"GPT-6 Luna","provider":"OpenAI","score":69.4,"cost":0.132,"task":"批量改写、摘要提取","open":false},{"name":"GPT-5.5","provider":"OpenAI","score":68.7,"cost":3.025,"task":"兼容旧项目、文档处理","open":false},{"name":"Gemini 3.8 Flash","provider":"Google","score":67.3,"cost":1.111,"task":"轻量任务、文本整理","open":false},{"name":"Gemini 3.7 Flash","provider":"Google","score":67.2,"cost":0.876,"task":"快速推理、分类","open":false},{"name":"GPT-5.6 Luna","provider":"OpenAI","score":66.1,"cost":0.693,"task":"轻量整理、批处理","open":false},{"name":"Claude Sonnet 4.6","provider":"Anthropic","score":65.1,"cost":7.293,"task":"旧工作流兼容","open":false},{"name":"Qwen3.8 Max","provider":"Alibaba","score":64.2,"cost":1.557,"task":"开源部署、通用推理","open":true},{"name":"DeepSeek V4 Flash Vision","provider":"DeepSeek","score":63.6,"cost":0.134,"task":"视觉理解、开放部署","open":true}]};
+let data={models:[]}, family='latest', sort='score', search='';
 const finite=n=>typeof n==='number'&&Number.isFinite(n);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const num=n=>finite(n)?n.toLocaleString('en-US',{maximumFractionDigits:2}):'—';
@@ -642,6 +655,7 @@ sol:glyph('<circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2M12 19.5v2M2.5 12h
 terra:glyph('<path d="m12 3 9 9-9 9-9-9Z"/><path d="m12 8 4 4-4 4-4-4Z" fill="currentColor" stroke="none"/>'),
 luna:glyph('<path d="M20.9 13A9 9 0 1 1 11 3.1 7 7 0 0 0 20.9 13Z"/>'),
 opus:glyph('<path d="M12 3v18M3 12h18M5.64 5.64l12.72 12.72M5.64 18.36 18.36 5.64M8.56 3.69l6.88 16.62M3.69 8.56l16.62 6.88M3.69 15.44l16.62-6.88M8.56 20.31l6.88-16.62"/>')};
+icons.other=glyph('<circle cx="12" cy="12" r="8.5"/><path d="M7 12h10M12 7v10"/>');
 const effortLabels={max:'Max',xhigh:'极高',high:'高',medium:'中',low:'轻度'};
 const mode=m=>Object.hasOwn(icons,m.mode)?m.mode:'sol';
 function effort(m){if(m.effort)return m.effort;const n=m.name.toLowerCase();return n.includes('max')?'max':/xhigh|极高/.test(n)?'xhigh':/high|高/.test(n)?'high':/medium|中/.test(n)?'medium':'low';}
@@ -660,6 +674,8 @@ function picks(){
  {title:'省钱甜点位',sub:'批量总结 / 常规整理',tag:'BUDGET PICK',model:find('luna','high')}];
 }
 function overview(){
+ if(family==='latest')return liveOverview();
+ restoreLegacyLabels();
  const scored=sorted(data.models.filter(m=>finite(m.score))), costs=sorted(data.models.filter(m=>finite(m.cost_usd)),'cost');
  $('#modelCount').innerHTML=num(data.models.length)+' <small>个</small>';
  $('#topScore').innerHTML=num(scored[0]?.score)+' <small>pts</small>';$('#topModel').textContent=scored[0]?.name||'暂无数据';
@@ -674,6 +690,8 @@ function overview(){
  $('#opusModels').innerHTML=meta.models.map(m=>`<article class="opus-model-card"><div class="opus-card-head"><span class="model-icon" aria-hidden="true">${icons.opus}</span><div><h3>${esc(m.name)}</h3><span class="opus-version-badge">${esc(m.status)} · Anthropic</span></div></div><div class="opus-price-grid"><div><small>输入 / 百万 token</small><strong>$${num(m.input_mtok_usd)}</strong></div><div><small>输出 / 百万 token</small><strong>$${num(m.output_mtok_usd)}</strong></div><div><small>上下文窗口</small><strong>1M <span>tokens</span></strong></div></div><p class="opus-meta">${m.api_id===benchmark.model_id?'测评：五档分数与任务成本已补齐（Default Fallback）':'本轮未摘录测评数值；保留规格对比'}<br>Low / Medium / High / Xhigh / Max · 默认 ${esc(m.default_effort)}<br>最大常规输出 128K tokens · 标准 API 单价，不含缓存、批量、Fast 模式与区域加价。</p><div class="opus-actions"><button class="opus-compare-btn" type="button" data-opus-compare="${esc(m.api_id+':'+m.default_effort)}">与 GPT 对比 ↗</button><a class="opus-source" href="${esc(m.source_url)}" target="_blank" rel="noopener noreferrer">官方规格 ↗</a></div></article>`).join('');
 }
 function render(){
+ if(family==='latest')return liveRender();
+ restoreLegacyLabels();
  const rows=sorted(data.models.filter(m=>(family==='all'||m.family===family)&&(m.name+' '+(effortLabels[m.effort]||'')).toLowerCase().includes(search)),sort);
  $('#filteredCount').textContent=rows.length+' 个模式';$('#tableFoot').textContent={score:'按参考指数降序',cost:'按参考任务成本升序',value:'按参考指数 / 成本的启发式排序'}[sort]+' · 空缺项不排名';
  let rank=0,separator=false;
@@ -687,6 +705,7 @@ function render(){
 }
 function dock(){$('#compareNum').textContent=selected.size;$('#compareDock').hidden=!selected.size;}
 function compare(){
+ if([...selected].some(id=>id.startsWith('lb-')))return liveCompare();
  const rows=[...selected].map(id=>data.models.find(m=>m.id===id)).filter(Boolean);if(!rows.length)return;
  const mixed=rows.some(m=>m.mode==='opus'), field=(label,value,cls='')=>`<div class="comparison-field"><small>${label}</small><b class="${cls}">${value}</b></div>`;
  $('#compareResults').innerHTML=(mixed?'<p class="comparison-caveat">Opus 5.5 的分数和任务成本为 Artificial Analysis Intelligence Index v4.3.2 / Default Fallback（2026-10-09）快照；GPT 仍为未核验示例。本轮未摘录项目留空，不能据此作可靠的跨厂商优劣结论。</p>':'')+`<div class="compare-cards" style="--compare-cols:${rows.length}">`+rows.map(m=>{
@@ -705,13 +724,121 @@ function compare(){
  $('#compareDialog').showModal();
 }
 function exportCsv(){
+ if(family==='latest')return liveExport();
  let rank=0;
  const rows=[['参考排名','模型','模型家族','参考智能指数','参考单任务成本USD','参考相对消耗','适用任务（编辑建议）','数据状态','API输入USD/百万token','API输出USD/百万token','上下文tokens','最大常规输出tokens','effort','规格核对日期','规格来源','档位来源','价格口径','测评来源','基准版本','测评配置','测评摘录日期'],...sorted(data.models).map(m=>[finite(m.score)?++rank:'',m.name,m.family,m.score,m.cost_usd,m.relative_cost,best(m),m.benchmark_source?'Artificial Analysis 公开结果的日期快照':m.mode==='opus'?'官方规格；测评本轮未摘录':'GPT原始示例；名称/数值未核验',m.input_mtok_usd,m.output_mtok_usd,m.context_tokens,m.max_output_tokens,m.effort,m.mode==='opus'?meta.verified_on:'',m.source_url,m.mode==='opus'?meta.effort_source:'',m.mode==='opus'?meta.price_basis:'未核验参考任务成本',m.benchmark_source,m.benchmark_version,m.benchmark_configuration,m.benchmark_date])];
  const cell=v=>{let t=String(v??'');if(/^[=+@\t\r]/.test(t)||(/^[-]/.test(t)&&typeof v!=='number'))t="'"+t;return '"'+t.replaceAll('"','""')+'"';};
  const text='\ufeff'+rows.map(row=>row.map(cell).join(',')).join('\r\n');
  const url=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='MODEL-ATLAS-OPUS55-SNAPSHOT-2026-10-09.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
-$$('.filter-tab').forEach(b=>b.addEventListener('click',()=>{family=b.dataset.family;$$('.filter-tab').forEach(t=>{t.classList.toggle('active',t===b);t.setAttribute('aria-pressed',String(t===b));});render();}));
+
+/* Current benchmark shares the existing table and cards, but never mixes LiveBench
+   Overall or cost-per-successful-task with legacy AA Intelligence Index scores. */
+const liveRows=livebenchSnapshot.models.map((record,i)=>({
+ id:'lb-'+i,name:record.name,provider:record.provider,score:record.score,cost_usd:record.cost,
+ relative_cost:Math.round(record.cost*10000)/100,task:record.task,open:record.open,
+ mode:record.provider==='Anthropic'?'opus':record.provider==='OpenAI'?
+   (record.name.includes('Astra')?'astra':record.name.includes('Luna')?'luna':'sol'):'other',
+ family:'latest'
+}));
+const originalLabels={
+ chartFooter:document.querySelector('.hero-chart .chart-footer').innerHTML,
+ boardFoot:document.querySelector('.board-footer > span:first-child').innerHTML,
+ source:$('#heroSourceLabel').textContent
+};
+function liveMetricHeadings(active){
+ $('#indexColHeading').textContent=active?'LiveBench 综合分':'智能指数';
+ $('#indexColHint').textContent=active?'↑ 越高越好':'↑ 更高更好';
+ $('#costColHeading').textContent=active?'每成功任务成本':'任务成本';
+ $('#costColHint').textContent=active?'USD / successful task':'USD / task';
+ $('#boardHeading').textContent=active?'现役模型排行':'模型能力排行榜';
+ $('#chartHeading').textContent=active?'综合表现':'智能指数';
+ $('#peakLabel').textContent=active?'LiveBench 最高综合分':'参考最高智能指数';
+ $('#lowCostLabel').textContent=active?'最低每成功任务成本':'示例最低任务成本';
+ $('#updateLabel').textContent=active?'基准发布时间':'Opus 测评摘录';
+ $('#coverageNote').textContent=active?'LiveBench 2.0 · 2026-10-13':'35 个 GPT 参考 + 10 个 Opus 档位';
+ $('#sort option[value="score"]').textContent=active?'综合分数 ↓':'智能指数 ↓';
+ $('#sort option[value="cost"]').textContent=active?'成功任务成本 ↑':'任务成本 ↑';
+ $('#sort option[value="value"]').textContent=active?'效率指数 ↓（估算）':'性价比 ↓';
+}
+function restoreLegacyLabels(){
+ liveMetricHeadings(false);
+ $('#heroSourceLabel').textContent=originalLabels.source;
+ document.querySelector('.hero-chart .chart-footer').innerHTML=originalLabels.chartFooter;
+ document.querySelector('.board-footer > span:first-child').innerHTML=originalLabels.boardFoot;
+}
+function liveSorted(rows){
+ return [...rows].sort((a,b)=>{
+  if(sort==='cost')return a.cost_usd-b.cost_usd||b.score-a.score;
+  if(sort==='value')return b.score/(b.cost_usd+.05)-a.score/(a.cost_usd+.05)||b.score-a.score;
+  return b.score-a.score||a.cost_usd-b.cost_usd;
+ });
+}
+function liveOverview(){
+ liveMetricHeadings(true);
+ $('#heroSourceLabel').textContent='LIVEBENCH 2.0 · 2026-10-13';
+ document.querySelector('.hero-chart .chart-footer').innerHTML=
+  '<span>LiveBench 2.0 · Overall · 2026-10-13</span><span><a href="https://livebench.ai/" target="_blank" rel="noopener noreferrer">来源 ↗</a></span>';
+ document.querySelector('.board-footer > span:first-child').innerHTML=
+  '来源：<a href="https://livebench.ai/" target="_blank" rel="noopener noreferrer">LiveBench 2.0 ↗</a> · 2026-10-13 · 最新公开快照，非实时更新。<br>分数为 LiveBench Overall；成本为每成功任务美元成本，与原有 AA 指数及任务成本不混排。';
+ const ordered=[...liveRows].sort((a,b)=>b.score-a.score||a.cost_usd-b.cost_usd);
+ const cheapest=[...liveRows].sort((a,b)=>a.cost_usd-b.cost_usd);
+ $('#modelCount').innerHTML=liveRows.length+' <small>个</small>';
+ $('#topScore').innerHTML=num(ordered[0].score)+' <small>pts</small>';
+ $('#topModel').textContent=ordered[0].name;
+ $('#minCost').innerHTML=money(cheapest[0].cost_usd)+' <small>USD</small>';
+ $('#minCostModel').textContent=cheapest[0].name;
+ $('#lastCheck').textContent='10/13';
+ $('#versionLabel').textContent='LiveBench 2.0 · 2026-10-13';
+ $('#statusBanner').className='status-banner';
+ $('#statusBanner').innerHTML='<div class="status-left"><span class="status-icon">ⓘ</span><span><strong>现役模型 · LiveBench 2.0（28 项精选）</strong><br>发布日期 2026-10-13；同口径比较综合分与每成功任务成本。切到「全部」可看原版 GPT／Opus 参考表；本站非实时同步。</span></div><span class="status-right">来源：<a href="https://livebench.ai/" target="_blank" rel="noopener noreferrer">LiveBench ↗</a></span>';
+ $('#footerFreshness').textContent='LIVEBENCH 2.0 · 2026-10-13 / SNAPSHOT';
+ const max=ordered[0].score;
+ $('#heroBars').innerHTML=ordered.slice(0,5).map(m=>
+   '<div class="barline"><span class="bar-label" title="'+esc(m.name)+'">'+esc(m.name)+'</span><div class="bar-track"><div class="bar-fill '+(mode(m)==='opus'?'opus':mode(m)==='astra'?'purple':mode(m)==='sol'?'orange':'blue')+'" style="width:'+(m.score/max*100)+'%"></div></div><span class="bar-number">'+num(m.score)+'</span></div>'
+ ).join('');
+ const select=name=>liveRows.find(m=>m.name===name);
+ const cards=[
+  {title:'旗舰质量',tag:'FLAGSHIP QUALITY',sub:'复杂研究 / 关键交付',m:select('Claude Fable 5.1')},
+  {title:'质量甜点位',tag:'HIGH QUALITY',sub:'复杂工程 / 方案评审',m:select('GPT-6 Astra')},
+  {title:'日常甜点位',tag:'EVERYDAY SWEET SPOT',sub:'开发 / 专业办公',m:select('GPT-6.1 Sol')},
+  {title:'省钱甜点位',tag:'BUDGET PICK',sub:'轻量开发 / 批量任务',m:select('DeepSeek V4.1 Flash')}
+ ];
+ $('#picks').innerHTML=cards.filter(p=>p.m).map(p=>{
+  const c=mode(p.m);
+  return '<article class="pick '+c+'"><div class="pick-symbol" aria-hidden="true">'+icons[c]+'</div><div class="pick-tag">'+esc(p.tag)+'</div><h3 title="'+esc(p.m.name)+'">'+esc(p.m.name)+'</h3><p>'+esc(p.title)+' · '+esc(p.sub)+'</p><small class="pick-citation">选型建议 · LiveBench 2.0 快照<br>非官方推荐</small><span class="pick-letter" aria-hidden="true">'+c[0].toUpperCase()+'</span></article>';
+ }).join('');
+}
+function liveRender(){
+ liveMetricHeadings(true);
+ const q=search.toLowerCase();
+ const rows=liveSorted(liveRows.filter(m=>(m.name+' '+m.provider+' '+m.task).toLowerCase().includes(q)));
+ $('#filteredCount').textContent=rows.length+' 个现役模型';
+ $('#tableFoot').textContent={score:'按 LiveBench 综合分数降序',cost:'按每成功任务成本升序',value:'按分数 /（成本 + $0.05）的启发式排序'}[sort]+' · 2026-10-13 固定快照 · 非 AA 指数';
+ $('#rankingRows').innerHTML=rows.length?rows.map((m,i)=>{
+  const c=mode(m);
+  return '<tr class="family-'+c+'" data-model-id="'+esc(m.id)+'"><td><span class="rank-number '+(i<3?'top3':'')+'">'+(i+1)+'</span></td><td><div class="model-cell"><span class="model-icon" aria-hidden="true">'+icons[c]+'</span><div><div class="model-name">'+esc(m.name)+'</div><span class="model-badge">'+esc(m.provider)+' · LB 2.0</span></div></div></td><td><span class="score-val">'+num(m.score)+'</span></td><td><span class="usd-cell">'+money(m.cost_usd)+'</span></td><td><span class="relative-cell">≈ '+num(m.relative_cost)+'</span></td><td class="best-cell" title="'+esc(m.task)+'">'+esc(m.task)+'</td><td><input class="compare-checkbox" type="checkbox" data-id="'+esc(m.id)+'" aria-label="选择 '+esc(m.name)+' 进行对比" '+(selected.has(m.id)?'checked':'')+'></td></tr>';
+ }).join(''):'<tr><td colspan="7" class="empty-row">没有找到符合条件的现役模型。</td></tr>';
+}
+function liveCompare(){
+ const rows=liveRows.filter(m=>selected.has(m.id));
+ if(!rows.length)return;
+ $('#compareResults').innerHTML='<p class="comparison-caveat">来源：<a href="https://livebench.ai/" target="_blank" rel="noopener noreferrer">LiveBench 2.0 ↗</a>（2026-10-13）。仅比较同一基准下的综合分、每成功任务成本。旧 AA 指标不参与本次比较。</p><div class="compare-cards" style="--compare-cols:'+rows.length+'">'+rows.map(m=>
+  '<article class="compare-card family-'+mode(m)+'"><div class="compare-card-top"><span class="model-icon" aria-hidden="true">'+icons[mode(m)]+'</span><strong>'+esc(m.name)+'</strong></div><p class="source-detail">'+esc(m.provider)+' · LiveBench 2.0</p><div class="comparison-field"><small>综合分数 ↑</small><b>'+num(m.score)+'</b></div><div class="comparison-field"><small>每成功任务成本 · USD ↓</small><b>'+money(m.cost_usd)+'</b></div><div class="comparison-field"><small>相对消耗（仅本基准）</small><b>≈ '+num(m.relative_cost)+'</b></div><p class="source-detail">'+esc(m.task)+'</p></article>'
+ ).join('')+'</div>';
+ $('#compareDialog').showModal();
+}
+function liveExport(){
+ const ordered=liveSorted(liveRows);
+ const lines=[['排序序号','模型','厂商','LiveBench 2.0 Overall','每成功任务成本 USD','相对消耗(成本/0.01)','选型建议(编辑)','测评日期','来源'],
+   ...ordered.map((m,i)=>[i+1,m.name,m.provider,m.score,m.cost_usd,m.relative_cost,m.task,livebenchSnapshot.released,livebenchSnapshot.url])];
+ const cell=x=>'"'+String(x??'').replaceAll('"','""')+'"';
+ const out='\ufeff'+lines.map(r=>r.map(cell).join(',')).join('\r\n');
+ const url=URL.createObjectURL(new Blob([out],{type:'text/csv;charset=utf-8'}));
+ const a=document.createElement('a');a.href=url;a.download='MODEL-ATLAS-LIVEBENCH-2026-10-13.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+$$('.filter-tab').forEach(b=>b.addEventListener('click',()=>{family=b.dataset.family;selected.clear();dock();$$('.filter-tab').forEach(t=>{t.classList.toggle('active',t===b);t.setAttribute('aria-pressed',String(t===b));});overview();render();}));
 $('#search').addEventListener('input',e=>{search=e.target.value.trim().toLowerCase();render();});
 $('#sort').addEventListener('change',e=>{sort=e.target.value;render();});
 $('#downloadCsv').addEventListener('click',exportCsv);$('#printPage').addEventListener('click',()=>window.print());
@@ -726,7 +853,7 @@ try{
   const b=m.api_id===benchmark.model_id?benchmark.measurements[m.effort]:null;
   if(b){m.score=b.score;m.cost_usd=b.cost_usd;m.relative_cost=Math.round(b.cost_usd*10000)/100;m.benchmark_source=benchmark.source_url;m.benchmark_version=benchmark.index_version;m.benchmark_configuration=benchmark.configuration;m.benchmark_date=benchmark.captured_on;}
  }
- data={...snap,models:[...snap.models,...extra]};overview();render();
+ data={...snap,models:[...snap.models,...extra]};const startFamily=family;family='all';overview();family=startFamily;overview();render();
 }catch(e){$('#statusBanner').className='status-banner status-error';$('#statusBanner').textContent='页面数据读取失败：'+e.message;$('#rankingRows').innerHTML='<tr><td colspan="7" class="empty-row">无法加载数据</td></tr>';}
 })();
 </script>

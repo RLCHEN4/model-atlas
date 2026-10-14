@@ -1,0 +1,32 @@
+name: Validate in-place model refresh
+on:
+  push:
+    branches: [update/livebench-inplace-20261014]
+    paths: [index.html, .github/workflows/validate-inplace.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify data, original structure, and script syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, subprocess, json
+          s=Path("index.html").read_text()
+          assert "current.html" not in s
+          assert 'uniform-ranking-row-layout' in s and 'hero-chart' in s and 'opusModels' in s
+          assert 'data-family="latest"' in s
+          assert 'function liveOverview()' in s and 'function liveRender()' in s and 'function liveCompare()' in s
+          assert '"source":"LiveBench 2.0"' in s
+          assert '"max":{"score":58,"cost_usd":5.98}' in s
+          assert 'family=startFamily;overview();render();' in s
+          assert 'source_url' not in s or 'artificialanalysis.ai' in s
+          scripts=re.findall(r'<script[^>]*>(.*?)</script>',s,re.S)
+          for i,code in enumerate(scripts):
+            p=Path('/tmp/model-atlas-'+str(i)+'.js');p.write_text(code)
+            subprocess.run(['node','--check',str(p)],check=True)
+          print('PASS: existing UI preserved; latest switch, 64px rows, Opus values, script syntax')
+          PY
