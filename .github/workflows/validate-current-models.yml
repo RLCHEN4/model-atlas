@@ -1,0 +1,46 @@
+name: Validate latest model board
+on:
+  push:
+    branches: [feature/current-models-20261014]
+    paths:
+      - "current.html"
+      - "current.js"
+      - "data/livebench-2026-10-13.json"
+      - "index.html"
+      - ".github/workflows/validate-current-models.yml"
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate structure and model snapshot
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('data/livebench-2026-10-13.json').read_text())
+          assert d['benchmark']=='LiveBench 2.0'
+          assert d['benchmark_release']=='2026-10-13'
+          assert len(d['models'])==28
+          assert len({x['name'] for x in d['models']})==28
+          assert len({x['provider'] for x in d['models']})>=6
+          assert all(isinstance(x['score'],(int,float)) and 0<=x['score']<=100 and x['cost']>0 for x in d['models'])
+          page=Path('current.html').read_text()
+          js=Path('current.js').read_text()
+          main=Path('index.html').read_text()
+          assert 'current.js' in page and 'current.html' in main
+          assert all('id="'+k+'"' in page for k in ['filters','search','sort','rows','compareRows','dock','pending'])
+          assert 'livebench-2026-10-13.json' in js
+          assert 'Opus' in main and 'hero-chart' in main and 'uniform-ranking-row-layout' in main
+          print('PASS: 28 distinct scored models; 6+ providers; UI controls; old homepage retained')
+          PY
+      - name: JavaScript syntax
+        run: node --check current.js
+      - name: GitHub Pages static file references
+        run: |
+          test -f current.html
+          test -f current.js
+          test -f data/livebench-2026-10-13.json
+          grep -q 'href="./current.html"' index.html
